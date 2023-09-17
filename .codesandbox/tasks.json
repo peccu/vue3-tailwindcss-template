@@ -1,0 +1,26 @@
+{
+  // These tasks will run in order when initializing your CodeSandbox project.
+  "setupTasks": [
+    {
+      "name": "Install Dependencies",
+      "command": "bun install"
+    }
+    ],
+
+  // These tasks can be run from CodeSandbox. Running one will open a log in the app.
+  "tasks": {
+    "bun run dev": {
+      "name": "bun run dev",
+      "command": "bun run format ; bun run dev",
+      "runAtStart": true
+    },
+    "bun run lint": {
+      "name": "lint",
+      "command": "bun run lint"
+    },
+    "bun run format": {
+      "name": "format",
+      "command": "bun run format"
+    }
+  }
+}
