@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./docker-build.sh
+./docker-build.sh bun .codesandbox
 
 docker run \
        --rm \

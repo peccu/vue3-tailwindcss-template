@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./docker-build.sh
+./docker-build.sh bun .codesandbox
 
 echo port mapping is 5555:5173
 docker run \

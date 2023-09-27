@@ -1,7 +1,9 @@
 #!/bin/bash
-docker images | grep -E 'bun +latest ' >/dev/null \
+image=$1
+context=$2
+docker images | grep -E $image' +latest ' >/dev/null \
     || (\
         echo no bun image found
-        cd .codesandbox
+        cd $context
         docker build -t bun .\
             )
