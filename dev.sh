@@ -13,4 +13,4 @@ docker run \
        -w /app \
        --entrypoint /bin/bash \
        bun \
-       -c "bun run dev -- --host"
+       -c "bun run dev"
