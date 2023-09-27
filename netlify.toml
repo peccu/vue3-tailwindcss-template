@@ -1,0 +1,15 @@
+# maybe you can use ...
+# https://github.com/peccu/netlify-faunadb-example
+# https://github.com/peccu/netlify-n-faunadb-sample
+[build]
+  functions = "functions"
+  # This will be run the site build
+  command = "NODE_ENV=production npm run build"
+  # This is the directory is publishing to netlify's CDN
+  publish = "dist"
+
+[dev]
+  # Local dev command. A.k.a npm start
+  command = "npm run dev"
+# [functions]
+# external_node_modules = ["chrome-aws-lambda"]
