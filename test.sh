@@ -15,5 +15,17 @@ docker run \
        -w /app \
        --ipc=host \
        mcr.microsoft.com/playwright:v1.38.0-jammy \
-       /bin/bash
+       /bin/bash \
+       -c "npm run build && npm run test:e2e"
 
+docker run \
+       -it \
+       --rm \
+       --name playwright \
+       -v "$PWD:/app" \
+       -p 9323:9323 \
+       -w /app \
+       --ipc=host \
+       mcr.microsoft.com/playwright:v1.38.0-jammy \
+       /bin/bash \
+       -c "npx playwright show-report --host 0.0.0.0"
