@@ -44,5 +44,11 @@
     "vite": "^4.4.9",
     "vitest": "^0.34.4",
     "vue-tsc": "^1.8.11"
+  },
+  "engines": {
+    "node": "16.x"
+  },
+  "glitch": {
+    "projectType": "generated_static"
   }
 }
