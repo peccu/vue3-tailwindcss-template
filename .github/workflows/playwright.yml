@@ -46,4 +46,4 @@ jobs:
       - name: Build
         run: npm run build
       - name: Run your tests
-        run: npx playwright test
+        run: HOME=/root npx playwright test
