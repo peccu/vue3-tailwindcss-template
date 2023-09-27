@@ -4,6 +4,7 @@
 
 echo port mapping is 9323:9323
 echo test with "npm run build && CI=1 npm run test:e2e"
+# https://playwright.dev/docs/ci-intro
 
 docker run \
        -it \
