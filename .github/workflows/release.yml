@@ -19,13 +19,17 @@ jobs:
       - name: Format
         run: bun run format
       - name: Build app
-        run: bun run build -- --base=${{ github.event.repository.name }}
+        # https://vitejs.dev/guide/build.html#public-base-path
+        # https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
+        # https://stackoverflow.com/a/61560798/514411
+        run: bun run build -- --base=${GITHUB_REPOSITORY#*/}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
           path: ./dist
 
   # Deployment job
+  # https://github.com/actions/starter-workflows/blob/main/pages/nuxtjs.yml
   deploy:
     environment:
       name: github-pages
