@@ -23,7 +23,7 @@ jobs:
         # https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
         # https://stackoverflow.com/a/61560798/514411
         # https://github.com/mysticatea/npm-run-all/blob/master/docs/run-p.md#argument-placeholders
-        run: bun run build --base=${GITHUB_REPOSITORY#*/}
+        run: bun run build --base=/${GITHUB_REPOSITORY#*/}/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
