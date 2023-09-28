@@ -1,9 +1,9 @@
 name: Playwright Tests
 on:
   push:
-    branches: [ ${{ github.event.repository.default_branch }} ]
+    branches: [ main, master ]
   pull_request:
-    branches: [ ${{ github.event.repository.default_branch }} ]
+    branches: [ main, master ]
 jobs:
   # output report
   # need to preview with npx playwright show-report name-of-my-extracted-playwright-report
