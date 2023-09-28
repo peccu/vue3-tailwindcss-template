@@ -1,13 +1,14 @@
 name: Playwright Tests
 on:
   push:
-    branches: [ main, master ]
+    branches: [ ${{ github.event.repository.default_branch }} ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ ${{ github.event.repository.default_branch }} ]
 jobs:
   # output report
   # need to preview with npx playwright show-report name-of-my-extracted-playwright-report
-  test:
+  html_report:
+    name: 'Playwright Tests : report to html'
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -31,8 +32,8 @@ jobs:
         retention-days: 30
 
   # use container
-  playwright:
-    name: 'Playwright Tests'
+  github_report:
+    name: 'Playwright Tests : report to github'
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.38.0-jammy
@@ -46,4 +47,4 @@ jobs:
       - name: Build
         run: npm run build
       - name: Run your tests
-        run: HOME=/root npx playwright test
+        run: HOME=/root GITHUB_REPORT=1 npx playwright test
