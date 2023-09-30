@@ -3,7 +3,7 @@ image=$1
 context=$2
 docker images | grep -E $image' +latest ' >/dev/null \
     || (\
-        echo no bun image found
+        echo no $image image found
         cd $context
-        docker build -t bun .\
+        docker build -t $image .\
             )
