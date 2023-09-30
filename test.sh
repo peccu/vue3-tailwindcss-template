@@ -1,9 +1,10 @@
 #!/bin/bash
 
-# ./docker-build.sh bun .codesandbox
+./docker-build.sh playwright .playwright
 
 echo port mapping is 9323:9323
-echo test with "npm run build && CI=1 npm run test:e2e"
+echo test with "npm run build && npm run test:e2e"
+echo then "npx playwright show-report --host 0.0.0.0"
 # https://playwright.dev/docs/ci-intro
 
 docker run \
@@ -14,10 +15,11 @@ docker run \
        -p 9323:9323 \
        -w /app \
        --ipc=host \
-       mcr.microsoft.com/playwright:v1.38.0-jammy \
+       playwright \
        /bin/bash \
-       -c "npm run build && npm run test:e2e"
-
+       -c "bun run build && bun run test:e2e"
+echo
+echo you can see the report in http://localhost:9323/
 docker run \
        -it \
        --rm \
@@ -26,6 +28,6 @@ docker run \
        -p 9323:9323 \
        -w /app \
        --ipc=host \
-       mcr.microsoft.com/playwright:v1.38.0-jammy \
+       playwright \
        /bin/bash \
-       -c "npx playwright show-report --host 0.0.0.0"
+       -c "bunx playwright show-report --host 0.0.0.0"
