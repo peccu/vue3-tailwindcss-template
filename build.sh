@@ -5,7 +5,7 @@
 docker run \
        --rm \
        --name bun-build \
-       -v "$PWD:/app" \
+       --mount type=bind,source="$(pwd)",target=/app \
        -w /app \
        --entrypoint /bin/bash \
        bun \

@@ -7,7 +7,7 @@ docker run \
        -it \
        --rm \
        --name bun-shell \
-       -v "$PWD:/app" \
+       --mount type=bind,source="$(pwd)",target=/app \
        -p 4173:4173 \
        -p 5555:5173 \
        -w /app \

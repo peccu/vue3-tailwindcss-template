@@ -8,7 +8,7 @@ docker run \
        -it \
        --rm \
        --name bun-dev \
-       -v "$PWD:/app" \
+       --mount type=bind,source="$(pwd)",target=/app \
        -p 5173:5173 \
        -w /app \
        --entrypoint /bin/bash \

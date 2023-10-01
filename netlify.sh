@@ -9,5 +9,5 @@ docker run \
        --name netlify-cli \
        -p 3000:3000 \
        -p 9999:9999 \
-       -v "$PWD:/app" \
+       --mount type=bind,source="$(pwd)",target=/app \
        netlify

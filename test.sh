@@ -11,7 +11,7 @@ docker run \
        -it \
        --rm \
        --name playwright \
-       -v "$PWD:/app" \
+       --mount type=bind,source="$(pwd)",target=/app \
        -p 9323:9323 \
        -w /app \
        --ipc=host \
@@ -24,7 +24,7 @@ docker run \
        -it \
        --rm \
        --name playwright \
-       -v "$PWD:/app" \
+       --mount type=bind,source="$(pwd)",target=/app \
        -p 9323:9323 \
        -w /app \
        --ipc=host \
