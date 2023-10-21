@@ -11,13 +11,6 @@ const number = ref(0)
 
     <div class="wrapper">
       <HelloWorld :msg="'You did it! with number'+number" />
-      <input
-        inputmode="numeric"
-        pattern="[0-9]*"
-        type="text"
-        class="p-1 mr-3 w-20 text-black"
-        v-model="number"
-        />
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
