@@ -13,7 +13,7 @@ const number = ref(0)
         inputmode="numeric"
         pattern="[0-9]*"
         type="text"
-        class="p-1 mr-3 w-20 text-black content-center"
+        class="p-1 mr-3 w-20 text-black flex justify-center items-center"
         v-model="number"
         />
     <h3>
