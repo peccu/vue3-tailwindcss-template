@@ -26,10 +26,6 @@
       "name": "unit test",
       "command": "bun run test:unit"
     },
-    "install playwright deps": {
-      "name": "install PlayWright deps",
-      "command": "bunx playwright install && bunx playwright install-deps"
-    },
     "bun run test:e2e": {
       "name": "E2E test",
       "command": "bun run test:e2e"
