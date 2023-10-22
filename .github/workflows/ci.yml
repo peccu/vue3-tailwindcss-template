@@ -53,7 +53,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: npx playwright test
+      run: npx playwright test --update-snapshots
     - uses: actions/upload-artifact@v3
       if: always()
       with:
@@ -78,4 +78,4 @@ jobs:
       - name: Build
         run: npm run build
       - name: Run your tests
-        run: HOME=/root GITHUB_REPORT=1 npx playwright test
+        run: HOME=/root GITHUB_REPORT=1 npx playwright test --update-snapshots
