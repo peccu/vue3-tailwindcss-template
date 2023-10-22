@@ -1,6 +1,14 @@
 import type { PlaywrightTestConfig } from '@playwright/test'
 import { devices } from '@playwright/test'
 
+const webServer = (): string => {
+  if (process.env.CI || process.env.ORIGINAL) {
+    // if ORIGINAL is set, outDir is overwrite
+    return 'vite preview --port 5173'
+  }
+  return 'vite dev'
+}
+
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -108,7 +116,7 @@ const config: PlaywrightTestConfig = {
      * Use the preview server on CI for more realistic testing.
     Playwright will re-use the local server if there is already a dev-server running.
      */
-    command: process.env.CI ? 'vite preview --port 5173' : 'vite dev',
+    command: webServer(),
     port: 5173,
     reuseExistingServer: !process.env.CI
   }
