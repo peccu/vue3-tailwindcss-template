@@ -18,6 +18,7 @@ test('visits the app root url', async ({ page }) => {
 // await page.fill('.input', '3');
 // expect(await page.screenshot()).toMatchSnapshot('vrt-top-page.png', { threshold: 0.075 });
 
+// Docs. https://playwright.dev/docs/test-snapshots
 test('vrt top page', async ({ page }) => {
   await page.goto('/');
 
