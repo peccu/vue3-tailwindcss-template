@@ -7,7 +7,7 @@
     "build": "./scripts/v.sh ; npm-run-all -p type-check 'build-only -- {@}' -s make404 --",
     "preview": "vite preview --host",
     "test:unit": "vitest",
-    "test:e2e": "playwright test",
+    "test:e2e": "playwright test && playwright show-report --host 0.0.0.0",
     "build-only": "vite build",
     "make404": "cp dist/index.html dist/404.html",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
