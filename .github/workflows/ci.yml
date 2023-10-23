@@ -77,5 +77,7 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
       - name: Run your tests
         run: HOME=/root GITHUB_REPORT=1 npx playwright test --update-snapshots
