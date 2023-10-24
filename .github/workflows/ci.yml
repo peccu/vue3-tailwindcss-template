@@ -78,6 +78,6 @@ jobs:
       - name: Build
         run: npm run build
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install msedge && npx playwright install chrome
       - name: Run your tests
         run: HOME=/root GITHUB_REPORT=1 npx playwright test --update-snapshots
