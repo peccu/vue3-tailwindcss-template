@@ -29,6 +29,10 @@
     "bun run test:e2e": {
       "name": "E2E test",
       "command": "bun run test:e2e"
+    },
+    "dependecy cruiser": {
+      "name": "Dependency Cruise",
+      "command": "bunx depcruise --config .dependency-cruiser.js src"
     }
   }
 }
