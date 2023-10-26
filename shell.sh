@@ -6,6 +6,7 @@ echo port mapping is
 echo "5555:5173 (dev server)"
 echo "4444:4173 (preview server)"
 echo "9999:9323 (PlayWright report)"
+echo "55555:51204 (Vitest UI)"
 
 docker run \
        -it \
@@ -15,6 +16,7 @@ docker run \
        -p 4444:4173 \
        -p 5555:5173 \
        -p 9999:9323 \
+       -p 55555:51204 \
        -w /app \
        --entrypoint /bin/bash \
        bun
