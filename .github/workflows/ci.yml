@@ -82,7 +82,7 @@ jobs:
 
   # https://qiita.com/hedrall/items/e5507dbec5429c69616f
   dependency_cruise:
-    naem: 'Dependency Cruiser'
+    name: 'Dependency Cruiser'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
