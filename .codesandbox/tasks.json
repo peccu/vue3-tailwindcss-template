@@ -33,6 +33,10 @@
     "dependecy cruiser": {
       "name": "Dependency Cruise",
       "command": "bunx depcruise --config .dependency-cruiser.js src"
+    },
+    "vitest coverage": {
+      "name": "Vitest Coverage",
+      "command": "bun run coverage"
     }
   }
 }
