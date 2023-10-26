@@ -16,7 +16,7 @@
     "test:vrt:prepare": "ORIGINAL=vrt-original run-s test:vrt:build test:e2e:update-snapshots",
     "test:vrt:build": "./scripts/v.sh ; ORIGINAL=vrt-original run-s build-only",
     "test:vrt:snapshots": "ORIGINAL=vrt-original run-s test:e2e:update-snapshots",
-    "coverage": "vitest run --coverage",
+    "coverage": "vitest run --coverage.enabled=true",
     "vitest-ui": "vitest --ui --no-open --api.host 0.0.0.0 --coverage.enabled=true",
     "build-only": "vite build",
     "make404": "cp dist/index.html dist/404.html",

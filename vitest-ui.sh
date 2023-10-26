@@ -9,6 +9,7 @@ docker run \
        --rm \
        --name vitestui \
        --mount type=bind,source="$(pwd)",target=/app \
+       --mount type=bind,source="$(pwd)/null",target=/app/node_modules \
        -p 51204:51204 \
        -w /app \
        --entrypoint /bin/bash \

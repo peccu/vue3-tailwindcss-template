@@ -6,7 +6,9 @@ export default mergeConfig(
   viteConfig,
   defineConfig({
     test: {
-      outputFile: './vitest-result',
+      outputFile: {
+        html: './vitest-result/index.html',
+      },
       reporters: ['default', 'html'],
       environment: 'jsdom',
       exclude: [...configDefaults.exclude, 'e2e/*'],
