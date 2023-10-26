@@ -6,3 +6,5 @@ RUN apt update -y && apt install -y curl unzip \
   && mv ~/.bun/bin/bun /usr/local/bin \
   && cd /usr/local/bin \
   && ln -s bun bunx
+
+RUN apt-get install -y graphviz
