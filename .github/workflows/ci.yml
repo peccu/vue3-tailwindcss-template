@@ -90,13 +90,13 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
       - name: 1. dependency-cruiserを実行する
-        run: depcruise --config .dependency-cruiser.js -T json > result.json
+        run: bunx depcruise --config .dependency-cruiser.js -T json > result.json
       - name: 2. 結果を標準出力する
-        run: depcruise-fmt -T err result.json
+        run: bunx depcruise-fmt -T err result.json
       - name: 3. Markdown出力用のファイルを作成し、タイトルを書き込む
         run: echo '# dependency-cruiserによる依存関係分析結果' > comment.md
       - name: 4. 結果をMarkdowでファイルに書き込む
-        run: depcruise-fmt -T markdown >> comment.md
+        run: bunx depcruise-fmt -T markdown >> comment.md
       - name: 5. find-commentを利用して、既存の自動コメントがあれば置き換えます
         uses: peter-evans/find-comment@v2
         id: fc
