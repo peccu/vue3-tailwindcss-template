@@ -43,17 +43,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 18
+    - uses: oven-sh/setup-bun@v1
     - name: Install dependencies
-      run: npm ci
+      run: bun install
     - name: Build
-      run: npm run build
+      run: bun run build
     - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+      run: bunx playwright install --with-deps
     - name: Run Playwright tests
-      run: npx playwright test --update-snapshots
+      run: bunx playwright test --update-snapshots
     - uses: actions/upload-artifact@v3
       if: always()
       with:
@@ -70,14 +68,12 @@ jobs:
       image: mcr.microsoft.com/playwright:v1.38.0-jammy
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
+      - uses: oven-sh/setup-bun@v1
       - name: Install dependencies
-        run: npm ci
+        run: bun install
       - name: Build
-        run: npm run build
+        run: bun run build
       - name: Install Playwright Browsers
-        run: npx playwright install msedge && npx playwright install chrome
+        run: bunx playwright install msedge && bunx playwright install chrome
       - name: Run your tests
-        run: HOME=/root GITHUB_REPORT=1 npx playwright test --update-snapshots
+        run: HOME=/root GITHUB_REPORT=1 bunx playwright test --update-snapshots
