@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
       - name: Install bun manually
-        run: apt update -y && apt install -y curl unzip && curl -fsSL https://bun.sh/install | bash && mv ~/.bun/bin/bun /usr/local/bin && cd /usr/local/bin && ln -s bun bunx
+        run: curl -fsSL https://bun.sh/install | bash && mv ~/.bun/bin/bun /usr/local/bin && cd /usr/local/bin && ln -s bun bunx
       # https://bun.sh/guides/runtime/cicd
       # - name: Install bun
       #   uses: oven-sh/setup-bun@v1
