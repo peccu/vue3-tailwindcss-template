@@ -5,7 +5,11 @@ This template should help get you started developing with Vue 3 in Vite.
 ## Uses
 
 - Vue3 + Vite + Playwright
-  - Generated via `bun create vue@latest .`.
+  - Generated via `bun create vue@latest vue-app --ts --vue-router --pinia --vitest --playwright --eslint-with-prettier --force`.
+- Vitest Coverage and Vitest UI
+  - Install via ` bun add -d @vitest/coverage-v8 @vitest/ui`.
+- Dependency Cruiser
+  - Install via `bun add -d dependency-cruiser`.
 - TailwindCSS
   - Installed via `bun add -d tailwindcss postcss autoprefixer` with some other setup documented in [Official document for Vite](https://tailwindcss.com/docs/guides/vite).
   - runs `bunx tailwindcss init -p`. (generates `tailwind.config.js`)
