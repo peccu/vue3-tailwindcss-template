@@ -103,6 +103,7 @@ jobs:
         run: bunx depcruise-fmt -T markdown result.json >> comment.md
       - name: 5. find-commentを利用して、既存の自動コメントがあれば置き換えます
         uses: peter-evans/find-comment@v2
+        continue-on-error: true
         id: fc
         with:
           issue-number: ${{ github.event.pull_request.number }}
