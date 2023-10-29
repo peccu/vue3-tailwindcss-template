@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright:v1.38.0-jammy
+FROM mcr.microsoft.com/playwright:v1.39.0-jammy
 
 # Install bun and add it to PATH
 RUN apt update -y && apt install -y curl unzip \
