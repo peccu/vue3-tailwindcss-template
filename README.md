@@ -10,14 +10,29 @@ This template should help get you started developing with Vue 3 in Vite.
   - Install via ` bun add -d @vitest/coverage-v8 @vitest/ui`.
 - Dependency Cruiser
   - Install via `bun add -d dependency-cruiser`.
+  - Create default configuration via `bunx depcruise --init`.
+  ```
+✔ Where do your source files live? … src
+✔ Do your test files live in a separate folder? … yes
+✔ Where do your test files live? … e2e
+✔ Looks like you're using a 'tsconfig.json'. Use that? … yes
+✔ Full path to your 'tsconfig.json › tsconfig.json
+✔ Also regard TypeScript dependencies that exist only before compilation? … yes
+
+  ✔ Successfully created '.dependency-cruiser.js'
+
+  ```
+  - and modify `not-to-test` from `^(e2e)` to `^(e2e|__tests__)`.
 - TailwindCSS
   - Installed via `bun add -d tailwindcss postcss autoprefixer` with some other setup documented in [Official document for Vite](https://tailwindcss.com/docs/guides/vite).
-  - runs `bunx tailwindcss init -p`. (generates `tailwind.config.js`)
+  - runs `bunx tailwindcss init -p`. (generates `tailwind.config.js` and `postcss.config.ts`)
   - update `tailwind.config.js`
   - add `@tailwind` directives into `src/assets/base.css`
 - GitHub Actions
   - CI (unit test and E2E test with Playwright). see [.github/workflows/ci.yml](.github/workflows/ci.yml)
   - Release build (host built application on GitHub Pages. You need to activate it in repository's settings page). see [.github/workflows/release.yml](.github/workflows/release.yml)
+- GitHub Pages redirects
+  - copy built `index.html` to `404.html` for direct access to vue-router's each pages.
 - Codesandbox Configurations
   - `bun` installed container. see [./.codesandbox/Dockerfile](.codesandbox/Dockerfile)
   - Some useful tasks. see [./.codesandbox/tasks.json](.codesandbox/tasks.json)
@@ -26,6 +41,13 @@ This template should help get you started developing with Vue 3 in Vite.
     - Other defined on demand tasks
       - `bun run lint`
       - `bun run format`
+- Netlify hosting
+  - add `public/_redirects` for direct access to vue-router's each pages.
+- PWA
+  - for add to home screen.
+  - add `public/manifest.json` and add meta tags into `index.html`.
+- Version up reload script
+  - `public/vup.js`, `scripts/v.js` and `scripts/v.sh` implements auto reloading when new version has released for PWA (without reload button).
 - Some Tweaks
   - `bun`'s `package.json` parsing is not same as `npm`, so I updated the `.scripts.build` from `"run-p type-check \"build-only {@}\" -- "` to `"run-p type-check 'build-only -- {@}' --"`.
     - refs. [Spaces and quotes aren't handled correctly by bun run · Issue #53 · oven-sh/bun](https://github.com/oven-sh/bun/issues/53)
