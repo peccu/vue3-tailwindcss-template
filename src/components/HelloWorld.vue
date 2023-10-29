@@ -8,7 +8,11 @@ const number = ref(0)
 
 <template>
   <div class="greetings">
-    <h1 class="relative font-medium leading-normal text-center lg:text-left -top-[10px] text-[2.6rem] green">{{ msg }} with number {{ number }}</h1>
+    <h1
+      class="relative font-medium leading-normal text-center lg:text-left -top-[10px] text-[2.6rem] green"
+    >
+      {{ msg }} with number {{ number }}
+    </h1>
     <input
       inputmode="numeric"
       pattern="[0-9]*"
@@ -24,5 +28,4 @@ const number = ref(0)
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
