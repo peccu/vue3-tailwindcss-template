@@ -69,7 +69,7 @@ jobs:
     name: 'Playwright Tests : report to github'
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.38.0-jammy
+      image: mcr.microsoft.com/playwright:v1.39.0-jammy
     steps:
       - uses: actions/checkout@v3
       - name: install unzip
