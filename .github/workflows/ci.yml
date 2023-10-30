@@ -111,6 +111,7 @@ jobs:
           body-includes: dependency-cruiserによる依存関係分析結果
       - name: 6. コメントを投稿する
         uses: peter-evans/create-or-update-comment@v2
+        continue-on-error: true
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
