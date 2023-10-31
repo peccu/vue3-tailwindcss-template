@@ -1,0 +1,27 @@
+name: 'Dependency Cruise'
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  depcruise:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install bun
+        uses: oven-sh/setup-bun@v1
+      - name: bun version
+        run: bun --version
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Dependency Cruise
+        run: bunx depcruise src --config --output-type markdown >> $GITHUB_STEP_SUMMARY
+      - name: Dependency Cruise Mermaid block
+        run: |
+          echo '----' >> $GITHUB_STEP_SUMMARY
+          echo '# Mermaid block' >> $GITHUB_STEP_SUMMARY
+          echo '```mermaid' >> $GITHUB_STEP_SUMMARY
+          bunx depcruise src --config --output-type mermaid >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY

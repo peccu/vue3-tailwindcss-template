@@ -15,11 +15,11 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-      - name: Install bun manually
-        run: env|sort;curl -fsSL https://bun.sh/install | bash && mv ~/.bun/bin/bun /usr/local/bin && cd /usr/local/bin && ln -s bun bunx
+      # - name: Install bun manually
+      #   run: env|sort;curl -fsSL https://bun.sh/install | bash && mv ~/.bun/bin/bun /usr/local/bin && cd /usr/local/bin && ln -s bun bunx
       # https://bun.sh/guides/runtime/cicd
-      # - name: Install bun
-      #   uses: oven-sh/setup-bun@v1
+      - name: Install bun
+        uses: oven-sh/setup-bun@v1
       # run any `bun` or `bunx` command
       - name: bun version
         run: bun --version
