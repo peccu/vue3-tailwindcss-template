@@ -1,0 +1,57 @@
+name: Pull Requests
+
+on:
+  pull_request:
+
+jobs:
+  # https://qiita.com/hedrall/items/e5507dbec5429c69616f
+  dependency_cruise:
+    name: 'Dependency Cruiser'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: oven-sh/setup-bun@v1
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: 1. dependency-cruiserを実行する
+        run: bunx depcruise --config .dependency-cruiser.js -T json src > result.json
+      - name: 2. 結果を標準出力する
+        run: bunx depcruise-fmt -T err result.json
+      - name: 3. Markdown出力用のファイルを作成し、タイトルを書き込む
+        run: echo '# dependency-cruiserによる依存関係分析結果' > comment.md
+      - name: 4. 結果をMarkdowでファイルに書き込む
+        run: bunx depcruise-fmt -T markdown result.json >> comment.md
+      - name: 5. find-commentを利用して、既存の自動コメントがあれば置き換えます
+        uses: peter-evans/find-comment@v2
+        continue-on-error: true
+        id: fc
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: dependency-cruiserによる依存関係分析結果
+      - name: 6. コメントを投稿する
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body-file: comment.md
+          edit-mode: replace
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  # https://github.com/MH4GF/dependency-cruiser-report-action
+  report:
+    permissions:
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: MH4GF/dependency-cruiser-report-action@v2
+
+  # https://github.com/MH4GF/dependency-cruiser-report-action
+  report2:
+    permissions:
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: MH4GF/dependency-cruiser-report-action@v2
+        with:
+          cruise-script: yarn run -s depcruise src
