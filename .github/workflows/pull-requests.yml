@@ -1,7 +1,7 @@
 name: Pull Requests
 
 on:
-  pull_requests:
+  pull_request:
 
 jobs:
   # https://qiita.com/hedrall/items/e5507dbec5429c69616f
