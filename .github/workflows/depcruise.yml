@@ -19,8 +19,10 @@ jobs:
       - name: Dependency Cruise
         run: bunx depcruise src --config --output-type markdown >> $GITHUB_STEP_SUMMARY
       - name: separator
-        run: echo "----\n```mermaid" >> $GITHUB_STEP_SUMMARY
+        run: echo "----" >> $GITHUB_STEP_SUMMARY
+      - name: Mermaid block
+        run: echo '```mermaid' >> $GITHUB_STEP_SUMMARY
       - name: Dependency Cruise Mermaid
         run: bunx depcruise src --config --output-type mermaid >> $GITHUB_STEP_SUMMARY
-      - name: separator
+      - name: Close block
         run: echo '```' >> $GITHUB_STEP_SUMMARY
