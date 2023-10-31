@@ -12,15 +12,14 @@ This template should help get you started developing with Vue 3 in Vite.
   - Install via `bun add -d dependency-cruiser`.
   - Create default configuration via `bunx depcruise --init`.
   ```
-✔ Where do your source files live? … src
-✔ Do your test files live in a separate folder? … yes
-✔ Where do your test files live? … e2e
-✔ Looks like you're using a 'tsconfig.json'. Use that? … yes
-✔ Full path to your 'tsconfig.json › tsconfig.json
-✔ Also regard TypeScript dependencies that exist only before compilation? … yes
+  ✔ Where do your source files live? … src
+  ✔ Do your test files live in a separate folder? … yes
+  ✔ Where do your test files live? … e2e
+  ✔ Looks like you're using a 'tsconfig.json'. Use that? … yes
+  ✔ Full path to your 'tsconfig.json › tsconfig.json
+  ✔ Also regard TypeScript dependencies that exist only before compilation? … yes
 
   ✔ Successfully created '.dependency-cruiser.js'
-
   ```
   - and modify `not-to-test` from `^(e2e)` to `^(e2e|__tests__)`.
 - TailwindCSS
