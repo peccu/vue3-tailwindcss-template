@@ -1,0 +1,37 @@
+name: release
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# https://stackoverflow.com/a/74167257/514411
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    name: build-app
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Install bun
+        uses: oven-sh/setup-bun@v1
+      - name: Install dependencies
+        run: bun install
+      - name: Format
+        run: bun run format
+      - name: Build app
+        # https://vitejs.dev/guide/build.html#public-base-path
+        # https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
+        # https://stackoverflow.com/a/61560798/514411
+        # https://github.com/mysticatea/npm-run-all/blob/master/docs/run-p.md#argument-placeholders
+        run: bun run build --base=/${GITHUB_REPOSITORY#*/}/
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./dist
