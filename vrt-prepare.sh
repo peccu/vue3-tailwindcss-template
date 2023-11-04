@@ -1,13 +1,8 @@
 #!/bin/bash
 
-./docker-build.sh bun .codesandbox
+CONTAINER_NAME=bun-vrt-prepare
+COMMAND="bun run test:vrt:prepare"
+PORT_MAPPINGS=""
 
-docker run \
-       -it \
-       --rm \
-       --name bun-vrt-prepare \
-       --mount type=bind,source="$(pwd)",target=/app \
-       -w /app \
-       --entrypoint /bin/bash \
-       bun \
-       -c "bun run test:vrt:prepare"
+source ./bun-container.sh
+bun-command $CONTAINER_NAME "$COMMAND" "$PORT_MAPPINGS"
