@@ -1,16 +1,10 @@
 #!/bin/bash
 
-./docker-build.sh bun .codesandbox
-
 echo port mapping is 5173:5173
 
-docker run \
-       -it \
-       --rm \
-       --name bun-dev \
-       --mount type=bind,source="$(pwd)",target=/app \
-       -p 5173:5173 \
-       -w /app \
-       --entrypoint /bin/bash \
-       bun \
-       -c "bun run dev"
+CONTAINER_NAME=bun-dev
+COMMAND="bun run dev"
+PORT_MAPPINGS="-p 5173:5173"
+
+source ./bun-container.sh
+bun-command $CONTAINER_NAME "$COMMAND" "$PORT_MAPPINGS"
