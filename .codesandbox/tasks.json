@@ -30,6 +30,10 @@
       "name": "E2E test",
       "command": "bun run test:e2e"
     },
+    "bun run storybook": {
+      "name": "Storybook",
+      "command": "bun run storybook"
+    },
     "dependecy cruiser": {
       "name": "Dependency Cruise",
       "command": "bunx depcruise --config .dependency-cruiser.js src"
