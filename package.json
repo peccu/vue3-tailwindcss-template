@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite --host",
-    "build": "./scripts/v.sh ; npm-run-all -p type-check 'build-only -- {@}' -s make404 --",
+    "build": "./scripts/v.sh ; npm-run-all -p type-check 'build-only {@}' -s make404 --",
     "preview": "vite preview --host",
     "test:unit": "vitest",
     "test:e2e": "playwright test && run-s test:e2e:show-report",
