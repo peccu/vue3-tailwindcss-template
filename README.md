@@ -47,6 +47,8 @@ This template should help get you started developing with Vue 3 in Vite.
   - add `public/manifest.json` and add meta tags into `index.html`.
 - Version up reload script
   - `public/vup.js`, `scripts/v.js` and `scripts/v.sh` implements auto reloading when new version has released for PWA (without reload button).
+- Storybook
+  - initialized with `bunx storybook@latest init`.
 - Some Tweaks
   - `bun`'s `package.json` parsing is not same as `npm`, so I updated the `.scripts.build` from `"run-p type-check \"build-only {@}\" -- "` to `"run-p type-check 'build-only -- {@}' --"`.
     - refs. [Spaces and quotes aren't handled correctly by bun run · Issue #53 · oven-sh/bun](https://github.com/oven-sh/bun/issues/53)
