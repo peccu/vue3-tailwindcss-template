@@ -25,6 +25,8 @@ jobs:
         run: bun --version
       - name: Install dependencies
         run: bun install --frozen-lockfile
+      - name: lint
+        run: bun run lint
       - name: unit test
         run: bun run test:unit
       # - name: e2e test
