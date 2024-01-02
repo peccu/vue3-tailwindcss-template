@@ -25,7 +25,8 @@
     "eslint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
     "storybook": "storybook dev -h 0.0.0.0 -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "storybook-preview-built": "vite preview --host 0.0.0.0 -p 8080 --outDir storybook-static"
   },
   "dependencies": {
     "pinia": "^2.1.7",
