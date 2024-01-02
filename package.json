@@ -21,10 +21,12 @@
     "build-only": "vite build",
     "make404": "cp dist/index.html dist/404.html",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "lint": "oxlint",
+    "eslint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "storybook": "storybook dev -h 0.0.0.0 -p 6006",
+    "storybook:build": "storybook build",
+    "storybook:preview-built": "vite preview --host 0.0.0.0 -p 8080 --outDir storybook-static"
   },
   "dependencies": {
     "pinia": "^2.1.7",
@@ -58,6 +60,7 @@
     "eslint-plugin-vue": "^9.17.0",
     "jsdom": "^22.1.0",
     "npm-run-all2": "^6.1.1",
+    "oxlint": "^0.0.22",
     "postcss": "^8.4.31",
     "prettier": "^3.0.3",
     "react": "^18.2.0",
