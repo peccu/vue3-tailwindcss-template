@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts" setup>
-import './header.css'
+import './sample-header.css'
 import MyButton from './SampleButton.vue'
 
 defineProps<{ user: { name: string } | null }>()

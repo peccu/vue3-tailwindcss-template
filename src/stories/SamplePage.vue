@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts" setup>
-import './page.css'
+import './sample-page.css'
 import MyHeader from './SampleHeader.vue'
 
 import { ref } from 'vue'
