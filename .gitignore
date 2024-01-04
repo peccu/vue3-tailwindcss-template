@@ -7,7 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
+node_modules*
 .DS_Store
 dist
 dist-ssr
@@ -32,6 +32,13 @@ playwright-report/
 vitest-result/
 storybook-static/
 e2e/*-snapshots/
+
+# for container temp package.json
+.playwright/package.json
+.vitestui/package.json
+
+# for VRT original built
+vrt-original/
 
 *~
 /public/v.js
