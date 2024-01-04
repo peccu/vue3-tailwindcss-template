@@ -84,4 +84,4 @@ jobs:
       - name: Install Playwright Browsers
         run: bunx playwright install msedge && bunx playwright install chrome
       - name: Run your tests
-        run: HOME=/root GITHUB_REPORT=1 bunx playwright test --update-snapshots
+        run: HOME=/root GITHUB_REPORT=1 bunx playwright test
