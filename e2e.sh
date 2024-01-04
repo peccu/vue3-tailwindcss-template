@@ -6,7 +6,7 @@ echo 'It includes running "playwright show-report"'
 # https://playwright.dev/docs/ci-intro
 
 CONTAINER_NAME=playwright
-COMMAND="bun run build && bun run test:e2e"
+COMMAND="bun run build && bun run test:e2e && bun run test:e2e:show-report"
 PORT_MAPPINGS="-p 9323:9323"
 VOLUMES="-v $(PWD)/node_modules_container:/app/node_modules"
 ENVIRONMENT=""
