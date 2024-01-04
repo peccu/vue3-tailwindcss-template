@@ -38,7 +38,7 @@ const config: PlaywrightTestConfig = {
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   // 'github' for GitHub Actions CI to generate annotations, plus a concise 'dot'
   // default 'list' when running locally
-  reporter: process.env.GITHUB_REPORT ? ['github', ['html', { host: '0.0.0.0' }]] : [['html', { host: '0.0.0.0' }]],
+  reporter: process.env.GITHUB_REPORT ? 'github' : [['html', { host: '0.0.0.0' }]],
   // reporter: 'list',
   // reporter: [['html', { host: '0.0.0.0' }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */

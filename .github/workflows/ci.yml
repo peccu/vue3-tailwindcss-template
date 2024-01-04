@@ -44,7 +44,7 @@ jobs:
   # output report
   # need to preview with npx playwright show-report name-of-my-extracted-playwright-report
   html_report:
-    name: 'Playwright Tests : running on ubuntu-latest'
+    name: 'Playwright Tests : report to html'
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -60,10 +60,10 @@ jobs:
         # this environment does not match fonts...
         run: bunx playwright test --update-snapshots
 
-  # output to github
+  # output to HTML
   # use container
   github_report:
-    name: 'Playwright Tests : running on playwright container and report to github'
+    name: 'Playwright Tests : running on playwright container and report to html'
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.40.1-jammy
@@ -79,7 +79,7 @@ jobs:
       - name: Build
         run: bun run build
       - name: Run your tests
-        run: HOME=/root GITHUB_REPORT=1 bunx playwright test
+        run: HOME=/root bunx playwright test
       - uses: actions/upload-artifact@v3
         if: always()
         with:
@@ -109,3 +109,24 @@ jobs:
           echo 'unzip playwright-report.zip' >> $GITHUB_STEP_SUMMARY
           echo 'bunx vite preview --host 0.0.0.0 --outDir .' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
+
+  # output to github
+  # use container
+  github_report:
+    name: 'Playwright Tests : running on playwright container and report to github'
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.40.1-jammy
+    steps:
+      - uses: actions/checkout@v3
+      - name: install unzip
+        run: apt-get update && apt-get install -y unzip && rm -rf /var/lib/apt/lists/*
+      - uses: oven-sh/setup-bun@v1
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Install Playwright Browsers
+        run: bunx playwright install msedge && bunx playwright install chrome
+      - name: Build
+        run: bun run build
+      - name: Run your tests
+        run: HOME=/root GITHUB_REPORT=1 bunx playwright test
