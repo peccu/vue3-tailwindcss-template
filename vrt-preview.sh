@@ -13,7 +13,7 @@ PORT_MAPPINGS="-p 4173:4173"
 VOLUMES="-v $(PWD)/node_modules_container:/app/node_modules"
 ENVIRONMENT=""
 
-source ./bun-container.sh
+source ./container.sh
 if [ ! -d node_modules_container ]
 then
     mkdir node_modules_container

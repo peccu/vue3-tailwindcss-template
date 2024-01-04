@@ -10,7 +10,7 @@ CONTAINER_NAME=bun-shell
 COMMAND="bash"
 PORT_MAPPINGS="-p 4444:4173 -p 5555:5173 -p 9999:9323 -p 55555:51204"
 
-source ./bun-container.sh
+source ./container.sh
 if exists bun
 then
     echo You already have the bun in your shell

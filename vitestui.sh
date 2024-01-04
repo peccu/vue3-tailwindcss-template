@@ -8,7 +8,7 @@ PORT_MAPPINGS="-p 51204:51204"
 VOLUMES="-v $(PWD)/node_modules_vitestui:/app/node_modules"
 ENVIRONMENT=""
 
-source ./bun-container.sh
+source ./container.sh
 if [ ! -d node_modules_vitestui ]
 then
     mkdir node_modules_vitestui
