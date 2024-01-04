@@ -4,33 +4,72 @@ function exists(){
     type $1 >/dev/null 2>&1
 }
 
+function playwright-installed(){
+    bunx playwright install --dry-run \
+        | grep Install \
+        | awk '{print $3}' \
+        | xargs ls 2>/dev/null
+}
+
 function bun-command(){
-    CONTAINER_NAME=$1
     COMMAND="$2"
-    PORT_MAPPINGS="$3"
-    VOLUMES="$4"
 
-    echo CONTAINER_NAME $CONTAINER_NAME
-    echo COMMAND $COMMAND
-    echo PORT_MAPPINGS $PORT_MAPPINGS
-    echo VOLUMES $VOLUMES
-
-    if [ $(exists bun;echo $?) -eq 0 -a "$USE_CONTAINER" != "1" ]
+    if exists bun && [ "$USE_CONTAINER" != "1" ]
     then
         ${COMMAND}
     else
         ./docker-build.sh bun .codesandbox
-        docker run \
-               -it \
-               --rm \
-               --name $CONTAINER_NAME \
-               --mount type=bind,source="$(pwd)",target=/app \
-               $(echo $VOLUMES) \
-               $(echo $PORT_MAPPINGS) \
-               -w /app \
-               --entrypoint /bin/bash \
-               bun \
-               -c "${COMMAND}"
+        _container-command bun "$@"
     fi
 
+}
+
+function playwright-command(){
+    COMMAND="$2"
+
+    if exists bun && [ "$USE_CONTAINER" != "1" ] && playwright-installed
+    then
+        ${COMMAND}
+    else
+        cp ./package.json .playwright/
+        ./docker-build.sh playwright .playwright
+
+        _container-command playwright "$@"
+    fi
+}
+
+function vitestui-command(){
+    COMMAND="$2"
+
+    if exists node && [ "$USE_CONTAINER" != "1" ]
+    then
+        ${COMMAND}
+    else
+        cp ./package.json .vitestui/
+        ./docker-build.sh vitestui .vitestui
+
+        _container-command vitestui "$@"
+    fi
+}
+
+function _container-command(){
+    IMAGE=$1
+    CONTAINER_NAME=$2
+    COMMAND="$3"
+    PORT_MAPPINGS="$4"
+    VOLUMES="$5"
+    ENVIRONMENT="$6"
+
+    docker run \
+           -it \
+           --rm \
+           --name $CONTAINER_NAME \
+           --mount type=bind,source="$(pwd)",target=/app \
+           $(echo $VOLUMES) \
+           $(echo $PORT_MAPPINGS) \
+           $(echo $ENVIRONMENT) \
+           -w /app \
+           --entrypoint /bin/bash \
+           $IMAGE \
+           -c "${COMMAND}"
 }
