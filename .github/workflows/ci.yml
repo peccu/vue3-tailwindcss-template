@@ -43,8 +43,8 @@ jobs:
   # Playwright Tests
   # output report
   # need to preview with npx playwright show-report name-of-my-extracted-playwright-report
-  html_report:
-    name: 'Playwright Tests : report to html'
+  on_ubuntu:
+    name: 'Playwright Tests : runs on ubuntu'
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -62,7 +62,7 @@ jobs:
 
   # output to HTML
   # use container
-  github_report:
+  html_report:
     name: 'Playwright Tests : running on playwright container and report to html'
     runs-on: ubuntu-latest
     container:
