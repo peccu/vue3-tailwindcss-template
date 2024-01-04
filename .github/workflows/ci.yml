@@ -57,33 +57,8 @@ jobs:
       - name: Install Playwright Browsers
         run: bunx playwright install --with-deps
       - name: Run Playwright tests. If some error found, you maybe forgot to update snapshots
+        # this environment does not match fonts...
         run: bunx playwright test --update-snapshots
-      - uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
-      # - name: Deploy result into github pages subdir
-      #   # https://github.com/marketplace/actions/github-pages-action
-      #   if: always() # We want this to always run, even if test fail prior to this step running
-      #   uses: peaceiris/actions-gh-pages@v3.7.3
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     destination_dir: .playwright-report
-      #     publish_dir: ./playwright-report/
-      #     keep_files: true
-      - name: Add notes into GitHub Step Summary
-        if: always()
-        run: |
-          echo '# preview result' >> $GITHUB_STEP_SUMMARY
-          echo '```sh' >> $GITHUB_STEP_SUMMARY
-          echo 'mkdir tmp' >> $GITHUB_STEP_SUMMARY
-          echo 'cd tmp' >> $GITHUB_STEP_SUMMARY
-          echo 'mv ~/Downloads/playwright-report.zip ./' >> $GITHUB_STEP_SUMMARY
-          echo 'unzip playwright-report.zip' >> $GITHUB_STEP_SUMMARY
-          echo 'bunx vite preview --host 0.0.0.0 --outDir .' >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
 
   # output to github
   # use container
@@ -108,22 +83,25 @@ jobs:
       - uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: playwright-report
+          name: playwright-report.zip
           path: playwright-report/
           retention-days: 30
-      - name: Deploy result into github pages subdir
-        # https://github.com/marketplace/actions/github-pages-action
-        if: always() # We want this to always run, even if test fail prior to this step running
-        uses: peaceiris/actions-gh-pages@v3.7.3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          destination_dir: .playwright-report
-          publish_dir: ./playwright-report/
-          keep_files: true
+      # this action does not work current configuration (github-pages branch or TOKEN)
+      # - name: Deploy result into github pages subdir
+      #   # https://github.com/marketplace/actions/github-pages-action
+      #   if: always() # We want this to always run, even if test fail prior to this step running
+      #   uses: peaceiris/actions-gh-pages@v3.7.3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     destination_dir: .playwright-report
+      #     publish_dir: ./playwright-report/
+      #     keep_files: true
       - name: Add notes into GitHub Step Summary
         if: always()
         run: |
-          echo '# preview result' >> $GITHUB_STEP_SUMMARY
+          echo '# How to preview result' >> $GITHUB_STEP_SUMMARY
+          echo 'Download playwright-report.zip from Artifacts above.' >> $GITHUB_STEP_SUMMARY
+          echo >> $GITHUB_STEP_SUMMARY
           echo '```sh' >> $GITHUB_STEP_SUMMARY
           echo 'mkdir tmp' >> $GITHUB_STEP_SUMMARY
           echo 'cd tmp' >> $GITHUB_STEP_SUMMARY
