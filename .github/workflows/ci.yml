@@ -65,6 +65,7 @@ jobs:
         path: playwright-report/
         retention-days: 30
     - name: Add notes into GitHub Step Summary
+      if: always()
       run: |
         echo '# preview result' >> $GITHUB_STEP_SUMMARY
         echo '```sh' >> $GITHUB_STEP_SUMMARY
