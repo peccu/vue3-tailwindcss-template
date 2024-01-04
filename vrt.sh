@@ -8,6 +8,12 @@ echo port mapping is 9323:9323
 CONTAINER_NAME=bun-vrt
 COMMAND="bun run test:vrt"
 PORT_MAPPINGS="-p 9323:9323"
+VOLUMES="-v $(PWD)/node_modules_container:/app/node_modules"
+ENVIRONMENT=""
 
 source ./bun-container.sh
-bun-command $CONTAINER_NAME "$COMMAND" "$PORT_MAPPINGS"
+if [ ! -d node_modules_container ]
+then
+    mkdir node_modules_container
+fi
+playwright-command $CONTAINER_NAME "$COMMAND" "$PORT_MAPPINGS" "$VOLUMES" "$ENVIRONMENT"
