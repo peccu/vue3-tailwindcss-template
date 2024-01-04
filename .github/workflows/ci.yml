@@ -56,8 +56,8 @@ jobs:
       run: bun run build
     - name: Install Playwright Browsers
       run: bunx playwright install --with-deps
-    - name: Run Playwright tests
-      run: bunx playwright test --update-snapshots
+    - name: Run Playwright tests. If some error found, you maybe forgot to update snapshots
+      run: bunx playwright test
     - uses: actions/upload-artifact@v3
       if: always()
       with:
