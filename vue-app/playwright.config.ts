@@ -1,13 +1,4 @@
-import type { PlaywrightTestConfig } from '@playwright/test'
-import { devices } from '@playwright/test'
-
-const webServer = (): string => {
-  if (process.env.CI || process.env.ORIGINAL) {
-    // if ORIGINAL is set, outDir is overwrite
-    return 'vite preview --port 5173'
-  }
-  return 'vite dev'
-}
+import { defineConfig, devices } from '@playwright/test'
 
 /**
  * Read environment variables from file.
@@ -18,7 +9,7 @@ const webServer = (): string => {
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-const config: PlaywrightTestConfig = {
+export default defineConfig({
   testDir: './e2e',
   /* Maximum time one test can run for. */
   timeout: 30 * 1000,
@@ -36,11 +27,7 @@ const config: PlaywrightTestConfig = {
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  // 'github' for GitHub Actions CI to generate annotations, plus a concise 'dot'
-  // default 'list' when running locally
-  reporter: process.env.GITHUB_REPORT ? 'github' : [['html', { host: '0.0.0.0' }]],
-  // reporter: 'list',
-  // reporter: [['html', { host: '0.0.0.0' }]],
+  reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
@@ -52,8 +39,7 @@ const config: PlaywrightTestConfig = {
     trace: 'on-first-retry',
 
     /* Only on CI systems run the tests headless */
-    // headless: !!process.env.CI
-    headless: true
+    headless: !!process.env.CI
   },
 
   /* Configure projects for major browsers */
@@ -75,35 +61,35 @@ const config: PlaywrightTestConfig = {
       use: {
         ...devices['Desktop Safari']
       }
-    },
+    }
 
     /* Test against mobile viewports. */
-    {
-      name: 'Mobile Chrome',
-      use: {
-        ...devices['Pixel 5'],
-      },
-    },
-    {
-      name: 'Mobile Safari',
-      use: {
-        ...devices['iPhone 12'],
-      },
-    },
+    // {
+    //   name: 'Mobile Chrome',
+    //   use: {
+    //     ...devices['Pixel 5'],
+    //   },
+    // },
+    // {
+    //   name: 'Mobile Safari',
+    //   use: {
+    //     ...devices['iPhone 12'],
+    //   },
+    // },
 
     /* Test against branded browsers. */
-    {
-      name: 'Microsoft Edge',
-      use: {
-        channel: 'msedge',
-      },
-    },
-    {
-      name: 'Google Chrome',
-      use: {
-        channel: 'chrome',
-      },
-    },
+    // {
+    //   name: 'Microsoft Edge',
+    //   use: {
+    //     channel: 'msedge',
+    //   },
+    // },
+    // {
+    //   name: 'Google Chrome',
+    //   use: {
+    //     channel: 'chrome',
+    //   },
+    // },
   ],
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
@@ -114,12 +100,10 @@ const config: PlaywrightTestConfig = {
     /**
      * Use the dev server by default for faster feedback loop.
      * Use the preview server on CI for more realistic testing.
-    Playwright will re-use the local server if there is already a dev-server running.
+     * Playwright will re-use the local server if there is already a dev-server running.
      */
-    command: webServer(),
+    command: process.env.CI ? 'vite preview --port 5173' : 'vite dev',
     port: 5173,
     reuseExistingServer: !process.env.CI
   }
-}
-
-export default config
+})
