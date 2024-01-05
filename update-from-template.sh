@@ -37,7 +37,7 @@ bun add -d oxlint
 bun run format
 patch -p0 < ../patch/storybook-fix-lint-error.patch
 ../patch/storybook-fix-lint-error.sh
-bun run eslint
+bun run lint
 
 patch -p0 < ../patch/my-config.patch
 
@@ -54,3 +54,6 @@ cp -R $(
         | grep -Ev '^'$APP'$' \
         | xargs -I{} echo "$APP/"{}
    ) ./
+
+rm -rf node_modules
+bun i
