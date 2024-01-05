@@ -298,10 +298,10 @@ index d9a7052..f79eb16 100644
    color: #333;
    font-size: 14px;
    margin-right: 10px;
-diff --git vue-app/src/stories/page.css vue-app/src/stories/page.css
+diff --git src/stories/page.css src/stories/page.css
 index 098dad1..bda6633 100644
---- vue-app/src/stories/page.css
-+++ vue-app/src/stories/page.css
+--- src/stories/page.css
++++ src/stories/page.css
 @@ -1,4 +1,4 @@
 -.storybook-page {
 +.storybook-sample-page {
