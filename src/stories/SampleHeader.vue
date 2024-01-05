@@ -41,7 +41,7 @@
 
 <script lang="ts" setup>
 import './header.css'
-import MySampleButton from './Button.vue'
+import MySampleButton from './SampleButton.vue'
 
 defineProps<{ user: { name: string } | null }>()
 
