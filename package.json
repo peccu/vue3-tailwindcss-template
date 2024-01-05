@@ -40,7 +40,7 @@
     "coverage:show-report": "vite preview --outDir vitest-result/coverage --host 0.0.0.0",
     "// code quality": "",
     "lint": "oxlint",
-    "// storybook": "",
+    "// storybook related": "",
     "storybook": "storybook dev -h 0.0.0.0 -p 6006",
     "storybook:build": "storybook build",
     "storybook:preview-built": "vite preview --host 0.0.0.0 --outDir storybook-static"
