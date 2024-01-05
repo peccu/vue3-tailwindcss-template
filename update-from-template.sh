@@ -25,7 +25,8 @@ bunx tailwindcss init -p
 patch -p0 < ../patch/tailwind.patch
 
 # This uses node.js and npm. not supported bun yet
-bunx storybook@latest init --disable-telemetry --package-manager bun --skip-install --yes
+bunx storybook@latest init --disable-telemetry --package-manager bun --skip-install --yes &
+sleep 60
 
 # does not supports storybook 7
 # bun add -d @storybook/addon-postcss
@@ -35,9 +36,13 @@ bun add -d eslint-plugin-storybook
 bun add -d oxlint
 
 bun run format
+patch -p0 < ../patch/storybook-fix-lint-error.patch
 bun run eslint
 
 patch -p0 < ../patch/my-config.patch
+
+# kill background storybook
+kill $(ps aux | grep '/.bin/storybook de[v]' | awk '{print $2}')
 
 rm -rf node_modules
 
