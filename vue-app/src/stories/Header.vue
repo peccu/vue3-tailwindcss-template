@@ -1,6 +1,6 @@
 <template>
   <header>
-    <div class="storybook-header">
+    <div class="storybook-sample-header">
       <div>
         <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
           <g fill="none" fill-rule="evenodd">
@@ -25,9 +25,9 @@
           >Welcome, <b>{{ user.name }}</b
           >!</span
         >
-        <my-button size="small" @click="$emit('logout')" label="Log out" v-if="user" />
-        <my-button size="small" @click="$emit('login')" label="Log in" v-if="!user" />
-        <my-button
+        <my-sample-button size="small" @click="$emit('logout')" label="Log out" v-if="user" />
+        <my-sample-button size="small" @click="$emit('login')" label="Log in" v-if="!user" />
+        <my-sample-button
           primary
           size="small"
           @click="$emit('createAccount')"
@@ -41,7 +41,7 @@
 
 <script lang="ts" setup>
 import './header.css'
-import MyButton from './Button.vue'
+import MySampleButton from './Button.vue'
 
 defineProps<{ user: { name: string } | null }>()
 

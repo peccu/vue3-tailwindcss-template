@@ -6,8 +6,17 @@ export default mergeConfig(
   viteConfig,
   defineConfig({
     test: {
+      outputFile: {
+        html: './vitest-result/index.html',
+      },
+      reporters: ['default', 'html'],
+      coverage: {
+        // https://vitest.dev/config/#coverage
+        reporter: ['text', 'json', 'html'],
+        reportsDirectory: './vitest-result/coverage',
+      },
       environment: 'jsdom',
-      exclude: [...configDefaults.exclude, 'e2e/*'],
+      exclude: [...configDefaults.exclude, 'e2e/*', 'vue-app/**'],
       root: fileURLToPath(new URL('./', import.meta.url))
     }
   })

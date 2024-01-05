@@ -33,10 +33,10 @@ const emit = defineEmits<{
 }>()
 
 const classes = computed(() => ({
-  'storybook-button': true,
-  'storybook-button--primary': props.primary,
-  'storybook-button--secondary': !props.primary,
-  [`storybook-button--${props.size || 'medium'}`]: true
+  'storybook-sample-button': true,
+  'storybook-sample-button--primary': props.primary,
+  'storybook-sample-button--secondary': !props.primary,
+  [`storybook-sample-button--${props.size || 'medium'}`]: true
 }))
 
 const style = computed(() => ({
