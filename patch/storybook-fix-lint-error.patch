@@ -1,0 +1,375 @@
+diff --git vue-app/src/stories/Button.stories.ts vue-app/src/stories/Button.stories.ts
+index 741ef60..311caaa 100644
+--- vue-app/src/stories/Button.stories.ts
++++ vue-app/src/stories/Button.stories.ts
+@@ -1,11 +1,11 @@
+ import type { Meta, StoryObj } from '@storybook/vue3'
+ 
+-import Button from './Button.vue'
++import SampleButton from './SampleButton.vue'
+ 
+ // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
+ const meta = {
+-  title: 'Example/Button',
+-  component: Button,
++  title: 'Example/SampleButton',
++  component: SampleButton,
+   // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/writing-docs/autodocs
+   tags: ['autodocs'],
+   argTypes: {
+@@ -14,7 +14,7 @@ const meta = {
+     onClick: { action: 'clicked' }
+   },
+   args: { primary: false } // default value
+-} satisfies Meta<typeof Button>
++} satisfies Meta<typeof SampleButton>
+ 
+ export default meta
+ type Story = StoryObj<typeof meta>
+@@ -26,27 +26,27 @@ type Story = StoryObj<typeof meta>
+ export const Primary: Story = {
+   args: {
+     primary: true,
+-    label: 'Button'
++    label: 'SampleButton'
+   }
+ }
+ 
+ export const Secondary: Story = {
+   args: {
+     primary: false,
+-    label: 'Button'
++    label: 'SampleButton'
+   }
+ }
+ 
+ export const Large: Story = {
+   args: {
+-    label: 'Button',
++    label: 'SampleButton',
+     size: 'large'
+   }
+ }
+ 
+ export const Small: Story = {
+   args: {
+-    label: 'Button',
++    label: 'SampleButton',
+     size: 'small'
+   }
+ }
+diff --git vue-app/src/stories/Button.vue vue-app/src/stories/Button.vue
+index 3fb0f8b..e889691 100644
+--- vue-app/src/stories/Button.vue
++++ vue-app/src/stories/Button.vue
+@@ -3,7 +3,7 @@
+ </template>
+ 
+ <script lang="ts" setup>
+-import './button.css'
++import './sample-button.css'
+ import { computed } from 'vue'
+ 
+ const props = withDefaults(
+@@ -33,10 +33,10 @@ const emit = defineEmits<{
+ }>()
+ 
+ const classes = computed(() => ({
+-  'storybook-button': true,
+-  'storybook-button--primary': props.primary,
+-  'storybook-button--secondary': !props.primary,
+-  [`storybook-button--${props.size || 'medium'}`]: true
++  'storybook-sample-button': true,
++  'storybook-sample-button--primary': props.primary,
++  'storybook-sample-button--secondary': !props.primary,
++  [`storybook-sample-button--${props.size || 'medium'}`]: true
+ }))
+ 
+ const style = computed(() => ({
+diff --git vue-app/src/stories/Header.stories.ts vue-app/src/stories/Header.stories.ts
+index 9ba6cf7..22cc02d 100644
+--- vue-app/src/stories/Header.stories.ts
++++ vue-app/src/stories/Header.stories.ts
+@@ -1,20 +1,20 @@
+ import type { Meta, StoryObj } from '@storybook/vue3'
+ 
+-import MyHeader from './Header.vue'
++import MySampleHeader from './SampleHeader.vue'
+ 
+ const meta = {
+   /* 👇 The title prop is optional.
+    * See https://storybook.js.org/docs/configure/#configure-story-loading
+    * to learn how to generate automatic titles
+    */
+-  title: 'Example/Header',
+-  component: MyHeader,
++  title: 'Example/SampleHeader',
++  component: MySampleHeader,
+   render: (args: any) => ({
+-    components: { MyHeader },
++    components: { MySampleHeader },
+     setup() {
+       return { args }
+     },
+-    template: '<my-header :user="args.user" />'
++    template: '<my-sample-header :user="args.user" />'
+   }),
+   parameters: {
+     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
+@@ -22,7 +22,7 @@ const meta = {
+   },
+   // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/writing-docs/autodocs
+   tags: ['autodocs']
+-} satisfies Meta<typeof MyHeader>
++} satisfies Meta<typeof MySampleHeader>
+ 
+ export default meta
+ type Story = StoryObj<typeof meta>
+diff --git vue-app/src/stories/Header.vue vue-app/src/stories/Header.vue
+index 6be40d2..fcf9c70 100644
+--- vue-app/src/stories/Header.vue
++++ vue-app/src/stories/Header.vue
+@@ -1,6 +1,6 @@
+ <template>
+   <header>
+-    <div class="storybook-header">
++    <div class="storybook-sample-header">
+       <div>
+         <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+           <g fill="none" fill-rule="evenodd">
+@@ -25,9 +25,9 @@
+           >Welcome, <b>{{ user.name }}</b
+           >!</span
+         >
+-        <my-button size="small" @click="$emit('logout')" label="Log out" v-if="user" />
+-        <my-button size="small" @click="$emit('login')" label="Log in" v-if="!user" />
+-        <my-button
++        <my-sample-button size="small" @click="$emit('logout')" label="Log out" v-if="user" />
++        <my-sample-button size="small" @click="$emit('login')" label="Log in" v-if="!user" />
++        <my-sample-button
+           primary
+           size="small"
+           @click="$emit('createAccount')"
+@@ -40,8 +40,8 @@
+ </template>
+ 
+ <script lang="ts" setup>
+-import './header.css'
+-import MyButton from './Button.vue'
++import './sample-header.css'
++import MySampleButton from './SampleButton.vue'
+ 
+ defineProps<{ user: { name: string } | null }>()
+ 
+diff --git vue-app/src/stories/Page.stories.ts vue-app/src/stories/Page.stories.ts
+index 9145746..e170d09 100644
+--- vue-app/src/stories/Page.stories.ts
++++ vue-app/src/stories/Page.stories.ts
+@@ -1,13 +1,13 @@
+ import type { Meta, StoryObj } from '@storybook/vue3'
+ import { within, userEvent, expect } from '@storybook/test'
+-import MyPage from './Page.vue'
++import MySamplePage from './SamplePage.vue'
+ 
+ const meta = {
+-  title: 'Example/Page',
+-  component: MyPage,
++  title: 'Example/SamplePage',
++  component: MySamplePage,
+   render: () => ({
+-    components: { MyPage },
+-    template: '<my-page />'
++    components: { MySamplePage },
++    template: '<my-sample-page />'
+   }),
+   parameters: {
+     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
+@@ -15,7 +15,7 @@ const meta = {
+   },
+   // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/writing-docs/autodocs
+   tags: ['autodocs']
+-} satisfies Meta<typeof MyPage>
++} satisfies Meta<typeof MySamplePage>
+ 
+ export default meta
+ type Story = StoryObj<typeof meta>
+diff --git vue-app/src/stories/Page.vue vue-app/src/stories/Page.vue
+index 0c31f02..aef88d4 100644
+--- vue-app/src/stories/Page.vue
++++ vue-app/src/stories/Page.vue
+@@ -1,8 +1,8 @@
+ <template>
+   <article>
+-    <my-header :user="user" @login="onLogin" @logout="onLogout" @create-account="onCreateAccount" />
++    <my-sample-header :user="user" @login="onLogin" @logout="onLogout" @create-account="onCreateAccount" />
+ 
+-    <section class="storybook-page">
++    <section class="storybook-sample-page">
+       <h2>Pages in Storybook</h2>
+       <p>
+         We recommend building UIs with a
+@@ -54,8 +54,8 @@
+ </template>
+ 
+ <script lang="ts" setup>
+-import './page.css'
+-import MyHeader from './Header.vue'
++ import './sample-page.css'
++import MySampleHeader from './SampleHeader.vue'
+ 
+ import { ref } from 'vue'
+ 
+diff --git vue-app/src/stories/button.css vue-app/src/stories/button.css
+index dc91dc7..0d7b5a7 100644
+--- vue-app/src/stories/button.css
++++ vue-app/src/stories/button.css
+@@ -1,4 +1,4 @@
+-.storybook-button {
++.storybook-sample-button {
+   font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+   font-weight: 700;
+   border: 0;
+@@ -7,24 +7,24 @@
+   display: inline-block;
+   line-height: 1;
+ }
+-.storybook-button--primary {
++.storybook-sample-button--primary {
+   color: white;
+   background-color: #1ea7fd;
+ }
+-.storybook-button--secondary {
++.storybook-sample-button--secondary {
+   color: #333;
+   background-color: transparent;
+   box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
+ }
+-.storybook-button--small {
++.storybook-sample-button--small {
+   font-size: 12px;
+   padding: 10px 16px;
+ }
+-.storybook-button--medium {
++.storybook-sample-button--medium {
+   font-size: 14px;
+   padding: 11px 20px;
+ }
+-.storybook-button--large {
++.storybook-sample-button--large {
+   font-size: 16px;
+   padding: 12px 24px;
+ }
+diff --git vue-app/src/stories/header.css vue-app/src/stories/header.css
+index d9a7052..f79eb16 100644
+--- vue-app/src/stories/header.css
++++ vue-app/src/stories/header.css
+@@ -1,4 +1,4 @@
+-.storybook-header {
++.storybook-sample-header {
+   font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+   padding: 15px 20px;
+@@ -7,12 +7,12 @@
+   justify-content: space-between;
+ }
+ 
+-.storybook-header svg {
++.storybook-sample-header svg {
+   display: inline-block;
+   vertical-align: top;
+ }
+ 
+-.storybook-header h1 {
++.storybook-sample-header h1 {
+   font-weight: 700;
+   font-size: 20px;
+   line-height: 1;
+@@ -21,11 +21,11 @@
+   vertical-align: top;
+ }
+ 
+-.storybook-header button + button {
++.storybook-sample-header button + button {
+   margin-left: 10px;
+ }
+ 
+-.storybook-header .welcome {
++.storybook-sample-header .welcome {
+   color: #333;
+   font-size: 14px;
+   margin-right: 10px;
+diff --git vue-app/src/stories/page.css vue-app/src/stories/page.css
+index 098dad1..bda6633 100644
+--- vue-app/src/stories/page.css
++++ vue-app/src/stories/page.css
+@@ -1,4 +1,4 @@
+-.storybook-page {
++.storybook-sample-page {
+   font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+   font-size: 14px;
+   line-height: 24px;
+@@ -8,7 +8,7 @@
+   color: #333;
+ }
+ 
+-.storybook-page h2 {
++.storybook-sample-page h2 {
+   font-weight: 700;
+   font-size: 32px;
+   line-height: 1;
+@@ -17,25 +17,25 @@
+   vertical-align: top;
+ }
+ 
+-.storybook-page p {
++.storybook-sample-page p {
+   margin: 1em 0;
+ }
+ 
+-.storybook-page a {
++.storybook-sample-page a {
+   text-decoration: none;
+   color: #1ea7fd;
+ }
+ 
+-.storybook-page ul {
++.storybook-sample-page ul {
+   padding-left: 30px;
+   margin: 1em 0;
+ }
+ 
+-.storybook-page li {
++.storybook-sample-page li {
+   margin-bottom: 8px;
+ }
+ 
+-.storybook-page .tip {
++.storybook-sample-page .tip {
+   display: inline-block;
+   border-radius: 1em;
+   font-size: 11px;
+@@ -48,14 +48,14 @@
+   vertical-align: top;
+ }
+ 
+-.storybook-page .tip-wrapper {
++.storybook-sample-page .tip-wrapper {
+   font-size: 13px;
+   line-height: 20px;
+   margin-top: 40px;
+   margin-bottom: 40px;
+ }
+ 
+-.storybook-page .tip-wrapper svg {
++.storybook-sample-page .tip-wrapper svg {
+   display: inline-block;
+   height: 12px;
+   width: 12px;
+@@ -64,6 +64,6 @@
+   margin-top: 3px;
+ }
+ 
+-.storybook-page .tip-wrapper svg path {
++.storybook-sample-page .tip-wrapper svg path {
+   fill: #1ea7fd;
+ }
