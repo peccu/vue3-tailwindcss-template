@@ -207,3 +207,50 @@ index 5c45e1d..f6079da 100644
    plugins: [
      vue(),
    ],
+diff --git .gitignore .gitignore
+index aef72d0..66f38d7 100644
+--- .gitignore
++++ .gitignore
+@@ -31,3 +31,19 @@ coverage
+ 
+ test-results/
+ playwright-report/
++vitest-result/
++storybook-static/
++# e2e/*-snapshots/
++
++# for container temp package.json
++.playwright/package.json
++.vitestui/package.json
++
++# for VRT original built
++vrt-original/
++
++# for container node_modules
++node_modules*
++
++*~
++/public/v.js
+diff --git vitest.config.ts vitest.config.ts
+index 10067d5..4bc2d4b 100644
+--- vitest.config.ts
++++ vitest.config.ts
+@@ -6,8 +6,17 @@ export default mergeConfig(
+   viteConfig,
+   defineConfig({
+     test: {
++      outputFile: {
++        html: './vitest-result/index.html',
++      },
++      reporters: ['default', 'html'],
++      coverage: {
++        // https://vitest.dev/config/#coverage
++        reporter: ['text', 'json', 'html'],
++        reportsDirectory: './vitest-result/coverage',
++      },
+       environment: 'jsdom',
+-      exclude: [...configDefaults.exclude, 'e2e/*'],
++      exclude: [...configDefaults.exclude, 'e2e/*', 'vue-app/**'],
+       root: fileURLToPath(new URL('./', import.meta.url))
+     }
+   })

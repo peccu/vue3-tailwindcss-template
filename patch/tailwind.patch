@@ -10,3 +10,18 @@ index 8816868..b03235e 100644
  /* color palette from <https://github.com/vuejs/theme> */
  :root {
    --vt-c-white: #ffffff;
+diff --git tailwind.config.js tailwind.config.js
+index c189a4a..a28ce71 100644
+--- tailwind.config.js
++++ tailwind.config.js
+@@ -1,6 +1,9 @@
+ /** @type {import('tailwindcss').Config} */
+ export default {
+-  content: [],
++  content: [
++    "./index.html",
++    "./src/**/*.{vue,js,ts,jsx,tsx}",
++  ],
+   theme: {
+     extend: {},
+   },
