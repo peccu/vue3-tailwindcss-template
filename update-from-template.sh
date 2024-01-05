@@ -26,7 +26,7 @@ patch -p0 < ../patch/tailwind.patch
 
 # This uses node.js and npm. not supported bun yet
 CI=true bunx storybook@latest init --disable-telemetry --package-manager bun --skip-install --yes
-
+bun i
 # does not supports storybook 7
 # bun add -d @storybook/addon-postcss
 
