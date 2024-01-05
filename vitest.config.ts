@@ -11,13 +11,13 @@ export default mergeConfig(
       },
       reporters: ['default', 'html'],
       environment: 'jsdom',
-      exclude: [...configDefaults.exclude, 'e2e/*', 'vue-app/**'],
-      root: fileURLToPath(new URL('./', import.meta.url)),
       coverage: {
         // https://vitest.dev/config/#coverage
         reporter: ['text', 'json', 'html'],
         reportsDirectory: './vitest-result/coverage',
       },
+      exclude: [...configDefaults.exclude, 'e2e/*', 'vue-app/**'],
+      root: fileURLToPath(new URL('./', import.meta.url))
     }
   })
 )
