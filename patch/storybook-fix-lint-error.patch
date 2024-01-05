@@ -1,7 +1,7 @@
-diff --git vue-app/src/stories/Button.stories.ts vue-app/src/stories/Button.stories.ts
+diff --git src/stories/Button.stories.ts src/stories/Button.stories.ts
 index 741ef60..311caaa 100644
---- vue-app/src/stories/Button.stories.ts
-+++ vue-app/src/stories/Button.stories.ts
+--- src/stories/Button.stories.ts
++++ src/stories/Button.stories.ts
 @@ -1,11 +1,11 @@
  import type { Meta, StoryObj } from '@storybook/vue3'
  
@@ -58,10 +58,10 @@ index 741ef60..311caaa 100644
      size: 'small'
    }
  }
-diff --git vue-app/src/stories/Button.vue vue-app/src/stories/Button.vue
+diff --git src/stories/Button.vue src/stories/Button.vue
 index 3fb0f8b..e889691 100644
---- vue-app/src/stories/Button.vue
-+++ vue-app/src/stories/Button.vue
+--- src/stories/Button.vue
++++ src/stories/Button.vue
 @@ -3,7 +3,7 @@
  </template>
  
@@ -86,10 +86,10 @@ index 3fb0f8b..e889691 100644
  }))
  
  const style = computed(() => ({
-diff --git vue-app/src/stories/Header.stories.ts vue-app/src/stories/Header.stories.ts
+diff --git src/stories/Header.stories.ts src/stories/Header.stories.ts
 index 9ba6cf7..22cc02d 100644
---- vue-app/src/stories/Header.stories.ts
-+++ vue-app/src/stories/Header.stories.ts
+--- src/stories/Header.stories.ts
++++ src/stories/Header.stories.ts
 @@ -1,20 +1,20 @@
  import type { Meta, StoryObj } from '@storybook/vue3'
  
@@ -125,10 +125,10 @@ index 9ba6cf7..22cc02d 100644
  
  export default meta
  type Story = StoryObj<typeof meta>
-diff --git vue-app/src/stories/Header.vue vue-app/src/stories/Header.vue
+diff --git src/stories/Header.vue src/stories/Header.vue
 index 6be40d2..fcf9c70 100644
---- vue-app/src/stories/Header.vue
-+++ vue-app/src/stories/Header.vue
+--- src/stories/Header.vue
++++ src/stories/Header.vue
 @@ -1,6 +1,6 @@
  <template>
    <header>
@@ -161,10 +161,10 @@ index 6be40d2..fcf9c70 100644
  
  defineProps<{ user: { name: string } | null }>()
  
-diff --git vue-app/src/stories/Page.stories.ts vue-app/src/stories/Page.stories.ts
+diff --git src/stories/Page.stories.ts src/stories/Page.stories.ts
 index 9145746..e170d09 100644
---- vue-app/src/stories/Page.stories.ts
-+++ vue-app/src/stories/Page.stories.ts
+--- src/stories/Page.stories.ts
++++ src/stories/Page.stories.ts
 @@ -1,13 +1,13 @@
  import type { Meta, StoryObj } from '@storybook/vue3'
  import { within, userEvent, expect } from '@storybook/test'
@@ -193,10 +193,10 @@ index 9145746..e170d09 100644
  
  export default meta
  type Story = StoryObj<typeof meta>
-diff --git vue-app/src/stories/Page.vue vue-app/src/stories/Page.vue
+diff --git src/stories/Page.vue src/stories/Page.vue
 index 0c31f02..aef88d4 100644
---- vue-app/src/stories/Page.vue
-+++ vue-app/src/stories/Page.vue
+--- src/stories/Page.vue
++++ src/stories/Page.vue
 @@ -1,8 +1,8 @@
  <template>
    <article>
@@ -219,10 +219,10 @@ index 0c31f02..aef88d4 100644
  
  import { ref } from 'vue'
  
-diff --git vue-app/src/stories/button.css vue-app/src/stories/button.css
+diff --git src/stories/button.css src/stories/button.css
 index dc91dc7..0d7b5a7 100644
---- vue-app/src/stories/button.css
-+++ vue-app/src/stories/button.css
+--- src/stories/button.css
++++ src/stories/button.css
 @@ -1,4 +1,4 @@
 -.storybook-button {
 +.storybook-sample-button {
@@ -259,10 +259,10 @@ index dc91dc7..0d7b5a7 100644
    font-size: 16px;
    padding: 12px 24px;
  }
-diff --git vue-app/src/stories/header.css vue-app/src/stories/header.css
+diff --git src/stories/header.css src/stories/header.css
 index d9a7052..f79eb16 100644
---- vue-app/src/stories/header.css
-+++ vue-app/src/stories/header.css
+--- src/stories/header.css
++++ src/stories/header.css
 @@ -1,4 +1,4 @@
 -.storybook-header {
 +.storybook-sample-header {
