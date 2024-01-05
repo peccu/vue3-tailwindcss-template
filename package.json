@@ -13,6 +13,8 @@
     "type-check": "vue-tsc --build --force",
     "eslint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
+    "// storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
     "//== added from here": "",
     "dev": "vite --host",
     "// build related": "",
