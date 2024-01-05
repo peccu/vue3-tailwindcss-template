@@ -26,17 +26,19 @@ patch -p0 < ../patch/tailwind.patch
 
 # This uses node.js and npm. not supported bun yet
 bunx storybook@latest init --disable-telemetry --package-manager bun --skip-install --yes
+
 # does not supports storybook 7
 # bun add -d @storybook/addon-postcss
-# dont used?
+
 bun add -d eslint-plugin-storybook
+patch -p0 < ../patch/eslint-plugin-storybook.patch
+patch -p0 < ../patch/tailwind-storybook.patch
 
 bun add -d oxlint
 
 bun run format
 bun run eslint
 
-# git diff -R --no-prefix .eslintrc.cjs e2e/tsconfig.json e2e/vue.spec.ts index.html playwright.config.ts tailwind.config.js vite.config.ts vitest.config.ts > patch/my-config.patch
 patch -p0 < ../patch/my-config.patch
 
 rm -rf node_modules
