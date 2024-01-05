@@ -31,8 +31,6 @@ bunx storybook@latest init --disable-telemetry --package-manager bun --skip-inst
 # bun add -d @storybook/addon-postcss
 
 bun add -d eslint-plugin-storybook
-patch -p0 < ../patch/eslint-plugin-storybook.patch
-patch -p0 < ../patch/tailwind-storybook.patch
 
 bun add -d oxlint
 
