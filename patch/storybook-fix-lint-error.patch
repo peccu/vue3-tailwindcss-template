@@ -6,7 +6,7 @@ index 741ef60..311caaa 100644
  import type { Meta, StoryObj } from '@storybook/vue3'
  
 -import Button from './Button.vue'
-+import SampleButton from './Button.vue'
++import SampleButton from './SampleButton.vue'
  
  // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
  const meta = {
@@ -94,7 +94,7 @@ index 9ba6cf7..22cc02d 100644
  import type { Meta, StoryObj } from '@storybook/vue3'
  
 -import MyHeader from './Header.vue'
-+import MySampleHeader from './Header.vue'
++import MySampleHeader from './SampleHeader.vue'
  
  const meta = {
    /* 👇 The title prop is optional.
@@ -157,7 +157,7 @@ index 6be40d2..fcf9c70 100644
 -import './header.css'
 -import MyButton from './Button.vue'
 +import './header.css'
-+import MySampleButton from './Button.vue'
++import MySampleButton from './SampleButton.vue'
  
  defineProps<{ user: { name: string } | null }>()
  
@@ -169,7 +169,7 @@ index 9145746..e170d09 100644
  import type { Meta, StoryObj } from '@storybook/vue3'
  import { within, userEvent, expect } from '@storybook/test'
 -import MyPage from './Page.vue'
-+import MySamplePage from './Page.vue'
++import MySamplePage from './SamplePage.vue'
  
  const meta = {
 -  title: 'Example/Page',
@@ -215,7 +215,7 @@ index 0c31f02..aef88d4 100644
 -import './page.css'
 -import MyHeader from './Header.vue'
 + import './page.css'
-+import MySampleHeader from './Header.vue'
++import MySampleHeader from './SampleHeader.vue'
  
  import { ref } from 'vue'
  

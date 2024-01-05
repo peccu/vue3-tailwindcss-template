@@ -36,6 +36,7 @@ bun add -d oxlint
 
 bun run format
 patch -p0 < ../patch/storybook-fix-lint-error.patch
+../patch/storybook-fix-lint-error.sh
 bun run eslint
 
 patch -p0 < ../patch/my-config.patch
