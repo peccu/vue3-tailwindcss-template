@@ -2,7 +2,6 @@
 
 echo port mapping is 9323:9323 for playwright show-report
 echo 'update snapshots with "npm run build && npm run test:e2e:update-snapshots"'
-echo 'It includes running "playwright show-report"'
 # https://playwright.dev/docs/ci-intro
 
 CONTAINER_NAME=playwright
