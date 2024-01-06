@@ -1,6 +1,11 @@
 <template>
   <article>
-    <my-sample-header :user="user" @login="onLogin" @logout="onLogout" @create-account="onCreateAccount" />
+    <my-sample-header
+      :user="user"
+      @login="onLogin"
+      @logout="onLogout"
+      @create-account="onCreateAccount"
+    />
 
     <section class="storybook-sample-page">
       <h2>Pages in Storybook</h2>
@@ -54,7 +59,7 @@
 </template>
 
 <script lang="ts" setup>
- import './page.css'
+import './page.css'
 import MySampleHeader from './SampleHeader.vue'
 
 import { ref } from 'vue'
