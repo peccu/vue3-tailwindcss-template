@@ -9,6 +9,13 @@ function run(){
     "$@"
 }
 
+function o(){
+    exists open \
+        && open "$1" \
+            || echo open "$1"
+}
+
+
 run bun run dev
 echo "==========build related=========="
 run bun run build
@@ -24,6 +31,7 @@ echo "==========vitest UI. This can show coverage report. This needs node instea
 # vitest ui does not work with bun
 docker pull node:lts-slim
 docker rmi vitestui
+o http://0.0.0.0:51204/__vitest__/
 run ./vitestui.sh
 
 # current playwright doesn't run in old mac
@@ -43,7 +51,9 @@ then
 else
     docker rmi playwright
     # runs e2e test in container
-    run ./e2e.sh
+    run ./e2e-update-snapshots.sh
+    # maybe this fails when updated. need to update snapshot by e2e-update-snapshots.sh
+    run ./e2e.sh || echo Please run ./e2e-show-report.sh to show report
     # build as previous version and take snapshots
     run ./vrt-prepare.sh
     # preview built previous version
