@@ -30,7 +30,7 @@ echo "==========vitest UI. This can show coverage report. This needs node instea
 # run bun run test:vitestui
 # vitest ui does not work with bun
 docker pull node:lts-slim
-docker rmi vitestui
+# docker rmi vitestui
 o http://0.0.0.0:51204/__vitest__/
 run ./vitestui.sh
 
@@ -49,7 +49,7 @@ then
     run bun run test:vrt:preview
     run bun run test:vrt:snapshots
 else
-    docker rmi playwright
+    # docker rmi playwright
     # runs e2e test in container
     run ./e2e-update-snapshots.sh
     # maybe this fails when updated. need to update snapshot by e2e-update-snapshots.sh
