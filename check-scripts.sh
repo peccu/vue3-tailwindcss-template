@@ -22,6 +22,8 @@ run bun run test:unit:show-report
 echo "==========vitest UI. This can show coverage report. This needs node instead of bun. You can use vitest-ui.sh=========="
 # run bun run test:vitestui
 # vitest ui does not work with bun
+docker pull node:lts-slim
+docker rmi vitestui
 run ./vitestui.sh
 
 # current playwright doesn't run in old mac
@@ -39,6 +41,7 @@ then
     run bun run test:vrt:preview
     run bun run test:vrt:snapshots
 else
+    docker rmi playwright
     # runs e2e test in container
     run ./e2e.sh
     # build as previous version and take snapshots
