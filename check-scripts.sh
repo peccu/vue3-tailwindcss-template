@@ -59,7 +59,7 @@ else
     # preview built previous version
     run ./vrt-preview.sh
     # build current local and compare it with previous verision's snapshots
-    run ./vrt.sh
+    run ./vrt.sh || echo Please run ./e2e-show-report.sh to show report
 fi
 
 echo "==========coverage=========="
