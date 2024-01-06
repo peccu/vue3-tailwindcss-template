@@ -57,3 +57,7 @@ cp -R $(
 
 rm -rf node_modules
 bun i
+
+echo
+echo maybe you need to update e2e snapshots by
+echo ./e2e-update-snapshots.sh
