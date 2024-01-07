@@ -24,7 +24,7 @@ Setup dependency cruiser. Please choose like below
 ✔ Do your test files live in a separate folder? … yes
 ✔ Where do your test files live? … e2e
 ✔ Looks like you're using a 'tsconfig.json'. Use that? … yes
-✔ Full path to your 'tsconfig.json › tsconfig.json
+✔ Full path to your 'tsconfig.json › tsconfig.app.json
 ✔ Also regard TypeScript dependencies that exist only before compilation? … yes
 ====================
 EOL
