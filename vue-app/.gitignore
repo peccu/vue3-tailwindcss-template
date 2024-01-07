@@ -27,9 +27,23 @@ coverage
 *.sln
 *.sw?
 
+*.tsbuildinfo
+
 test-results/
 playwright-report/
 vitest-result/
+storybook-static/
+# e2e/*-snapshots/
+
+# for container temp package.json
+.playwright/package.json
+.vitestui/package.json
+
+# for VRT original built
+vrt-original/
+
+# for container node_modules
+node_modules*
 
 *~
 /public/v.js

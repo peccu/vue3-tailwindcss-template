@@ -1,5 +1,4 @@
-import type { PlaywrightTestConfig } from '@playwright/test'
-import { devices } from '@playwright/test'
+import { defineConfig, devices } from '@playwright/test'
 
 const webServer = (): string => {
   if (process.env.CI || process.env.ORIGINAL) {
@@ -18,7 +17,7 @@ const webServer = (): string => {
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-const config: PlaywrightTestConfig = {
+export default defineConfig({
   testDir: './e2e',
   /* Maximum time one test can run for. */
   timeout: 30 * 1000,
@@ -114,12 +113,10 @@ const config: PlaywrightTestConfig = {
     /**
      * Use the dev server by default for faster feedback loop.
      * Use the preview server on CI for more realistic testing.
-    Playwright will re-use the local server if there is already a dev-server running.
+     * Playwright will re-use the local server if there is already a dev-server running.
      */
     command: webServer(),
     port: 5173,
     reuseExistingServer: !process.env.CI
   }
-}
-
-export default config
+})
