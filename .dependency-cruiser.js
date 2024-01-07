@@ -24,10 +24,10 @@ module.exports = {
       from: {
         orphan: true,
         pathNot: [
-          '(^|/)\.[^/]+\.(js|cjs|mjs|ts|json)$', // dot files
-          '\.d\.ts$',                            // TypeScript declaration files
-          '(^|/)tsconfig\.json$',                 // TypeScript config
-          '(^|/)(babel|webpack)\.config\.(js|cjs|mjs|ts|json)$' // other configs
+          '(^|/)[.][^/]+[.](js|cjs|mjs|ts|json)$', // dot files
+          '[.]d[.]ts$',                            // TypeScript declaration files
+          '(^|/)tsconfig[.]json$',                 // TypeScript config
+          '(^|/)(babel|webpack)[.]config[.](js|cjs|mjs|ts|json)$' // other configs
         ]
       },
       to: {},
@@ -148,7 +148,7 @@ module.exports = {
       severity: 'error',
       from: {},
       to: {
-        path: '\.(spec|test)\.(js|mjs|cjs|ts|ls|coffee|litcoffee|coffee\.md)$'
+        path: '[.](spec|test)[.](js|mjs|cjs|ts|ls|coffee|litcoffee|coffee[.]md)$'
       }
     },
     {
@@ -162,11 +162,19 @@ module.exports = {
         'from.pathNot re of the not-to-dev-dep rule in the dependency-cruiser configuration',
       from: {
         path: '^(src)',
-        pathNot: '\.(spec|test)\.(js|mjs|cjs|ts|ls|coffee|litcoffee|coffee\.md)$'
+        pathNot: '[.](spec|test)[.](js|mjs|cjs|ts|ls|coffee|litcoffee|coffee[.]md)$'
       },
       to: {
         dependencyTypes: [
-          'npm-dev'
+          'npm-dev',
+        ],
+        // type only dependencies are not a problem as they don't end up in the
+        // production code or are ignored by the runtime.
+        dependencyTypesNot: [
+          'type-only'
+        ],
+        pathNot: [
+          'node_modules/@types/'
         ]
       }
     },
@@ -233,8 +241,17 @@ module.exports = {
     */
     // focus : '',
 
-    /* list of module systems to cruise */
-    // moduleSystems: ['amd', 'cjs', 'es6', 'tsd'],
+    /* List of module systems to cruise. 
+       When left out dependency-cruiser will fall back to the list of _all_ 
+       module systems it knows of. It's the default because it's the safe option
+       It might come at a performance penalty, though.
+       moduleSystems: ['amd', 'cjs', 'es6', 'tsd']
+      
+       As in practice only commonjs ('cjs') and ecmascript modules ('es6')
+       are widely used, you can limit the moduleSystems to those.
+     */
+    
+    // moduleSystems: ['cjs', 'es6'],
 
     /* prefix for links in html and svg output (e.g. 'https://github.com/you/yourrepo/blob/develop/'
        to open it on your online repo or `vscode://file/${process.cwd()}/` to 
@@ -352,7 +369,17 @@ module.exports = {
          this if you're not sure, but still use TypeScript. In a future version
          of dependency-cruiser this will likely become the default.
        */
-      mainFields: ["main", "types", "typings"],
+      mainFields: ["module", "main", "types", "typings"],
+      /*
+         A list of alias fields in manifests (package.jsons).
+         Specify a field, such as browser, to be parsed according to
+         [this specification](https://github.com/defunctzombie/package-browser-field-spec).
+         Also see [resolve.alias](https://webpack.js.org/configuration/resolve/#resolvealiasfields)
+         in the webpack docs. 
+         
+         Defaults to an empty array (don't use any alias fields).
+       */
+      // aliasFields: ["browser"],
     },
     reporterOptions: {
       dot: {
@@ -459,4 +486,4 @@ module.exports = {
     }
   }
 };
-// generated: dependency-cruiser@15.0.0 on 2023-10-24T13:50:20.107Z
+// generated: dependency-cruiser@16.0.0 on 2024-01-07T05:24:35.319Z
