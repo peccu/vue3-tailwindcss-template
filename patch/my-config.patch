@@ -268,8 +268,8 @@ index 226a102..8053cc5 100644
    parameters: {
 diff --git .dependency-cruiser.cjs .dependency-cruiser.cjs
 index cc64b44..69ec80c 100644
---- .dependency-cruiser.js
-+++ .dependency-cruiser.js
+--- .dependency-cruiser.cjs
++++ .dependency-cruiser.cjs
 @@ -133,10 +133,10 @@ module.exports = {
          "or there's something in the test folder that isn't a test.",
        severity: 'error',
