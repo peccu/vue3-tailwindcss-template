@@ -133,10 +133,10 @@ module.exports = {
         "or there's something in the test folder that isn't a test.",
       severity: 'error',
       from: {
-        pathNot: '^(e2e)'
+        pathNot: '^(e2e|__tests__)'
       },
       to: {
-        path: '^(e2e)'
+        path: '^(e2e|__tests__)'
       }
     },
     {
@@ -162,7 +162,7 @@ module.exports = {
         'from.pathNot re of the not-to-dev-dep rule in the dependency-cruiser configuration',
       from: {
         path: '^(src)',
-        pathNot: '[.](spec|test)[.](js|mjs|cjs|ts|ls|coffee|litcoffee|coffee[.]md)$'
+        pathNot: '[.](spec|test|stories)[.](js|mjs|cjs|ts|ls|coffee|litcoffee|coffee[.]md)$'
       },
       to: {
         dependencyTypes: [
@@ -486,4 +486,4 @@ module.exports = {
     }
   }
 };
-// generated: dependency-cruiser@16.0.0 on 2024-01-07T05:24:35.319Z
+// generated: dependency-cruiser@16.0.0 on 2024-01-07T05:51:36.635Z
