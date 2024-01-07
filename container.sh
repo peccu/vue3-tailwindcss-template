@@ -60,6 +60,13 @@ function _container-command(){
     VOLUMES="$5"
     ENVIRONMENT="$6"
 
+    echo IMAGE ${IMAGE}
+    echo CONTAINER_NAME ${CONTAINER_NAME}
+    echo COMMAND ${COMMAND}
+    echo PORT_MAPPINGS ${PORT_MAPPINGS}
+    echo VOLUMES ${VOLUMES}
+    echo ENVIRONMENT ${ENVIRONMENT}
+
     docker run \
            -it \
            --rm \

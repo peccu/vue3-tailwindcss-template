@@ -1,11 +1,11 @@
 #!/bin/bash
 
 echo port mapping is 9323:9323 for playwright show-report
-echo 'update snapshots with "npm run build && npm run test:e2e:update-snapshots"'
+echo 'show test report with "npm run test:e2e:show-report"'
 # https://playwright.dev/docs/ci-intro
 
 CONTAINER_NAME=playwright
-COMMAND="bun run build && bun run test:e2e:update-snapshots"
+COMMAND="bun run test:e2e:show-report"
 PORT_MAPPINGS="-p 9323:9323"
 VOLUMES="-v $(PWD)/node_modules_container:/app/node_modules"
 ENVIRONMENT=""
