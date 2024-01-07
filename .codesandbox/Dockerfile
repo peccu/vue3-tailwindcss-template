@@ -7,4 +7,4 @@ RUN apt update -y && apt install -y curl unzip \
   && cd /usr/local/bin \
   && ln -s bun bunx
 
-RUN apt-get install -y graphviz
+RUN apt-get install -y graphviz patch
