@@ -75,3 +75,7 @@ echo "==========storybook=========="
 # run bun run storybook
 run bun run storybook:build
 run bun run storybook:preview-built
+
+echo "==========Dependency cruiser=========="
+run bunx depcruise src --config
+run bunx depcruise src --config --output-type markdown

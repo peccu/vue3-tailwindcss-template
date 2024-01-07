@@ -16,6 +16,20 @@ bun i
 
 bun add -d @vitest/coverage-v8 @vitest/ui
 bun add -d dependency-cruiser
+cat <<EOL
+Setup dependency cruiser. Please choose like below
+====================
+✔ It looks like this is an ESM package. Is that correct? … yes
+✔ Where do your source files live? … src
+✔ Do your test files live in a separate folder? … yes
+✔ Where do your test files live? … e2e
+✔ Looks like you're using a 'tsconfig.json'. Use that? … yes
+✔ Full path to your 'tsconfig.json › tsconfig.json
+✔ Also regard TypeScript dependencies that exist only before compilation? … yes
+====================
+EOL
+bunx depcruise --init
+
 bun add -d tailwindcss postcss autoprefixer
 
 bunx tailwindcss init -p
