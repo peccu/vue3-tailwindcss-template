@@ -1,4 +1,4 @@
-FROM node:18-slim
+FROM node:lts-slim
 
 ENV NODE_PATH=/node_modules
 WORKDIR /app

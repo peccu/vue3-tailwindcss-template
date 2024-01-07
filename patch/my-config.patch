@@ -1,0 +1,268 @@
+diff --git .eslintrc.cjs .eslintrc.cjs
+index 273b8f5..1d0a7fa 100644
+--- .eslintrc.cjs
++++ .eslintrc.cjs
+@@ -3,11 +3,13 @@ require('@rushstack/eslint-patch/modern-module-resolution')
+ 
+ module.exports = {
+   root: true,
++  'ignorePatterns': ['*.config.js', '!.storybook'],
+   'extends': [
+     'plugin:vue/vue3-essential',
+     'eslint:recommended',
+     '@vue/eslint-config-typescript',
+-    '@vue/eslint-config-prettier/skip-formatting'
++    '@vue/eslint-config-prettier/skip-formatting',
++    'plugin:storybook/recommended'
+   ],
+   parserOptions: {
+     ecmaVersion: 'latest'
+diff --git e2e/tsconfig.json e2e/tsconfig.json
+index 99923ab..79a91c7 100644
+--- e2e/tsconfig.json
++++ e2e/tsconfig.json
+@@ -1,4 +1,5 @@
+ {
+   "extends": "@tsconfig/node18/tsconfig.json",
+-  "include": ["./**/*"]
++  "include": ["./**/*"],
++  "exclude": ["./vue-app/**/*"]
+ }
+diff --git e2e/vue.spec.ts e2e/vue.spec.ts
+index 3e5a3d0..b2dbbf1 100644
+--- e2e/vue.spec.ts
++++ e2e/vue.spec.ts
+@@ -4,5 +4,29 @@ import { test, expect } from '@playwright/test';
+ // https://playwright.dev/docs/intro
+ test('visits the app root url', async ({ page }) => {
+   await page.goto('/');
+   await expect(page.locator('div.greetings > h1')).toHaveText('You did it!');
++})
++
++/*
++ * for VRT
++ * take base snapshots
++ * $ bun run test:e2e:vrt-snapshots
++ * and update local implementation and run VRT
++ * $ bun run test:e2e:vrt
++ */
++// cf. https://blog.cybozu.io/entry/2022/03/18/100000
++// await page.fill('.input', '3');
++// expect(await page.screenshot()).toMatchSnapshot('vrt-top-page.png', { threshold: 0.075 });
++
++// Docs. https://playwright.dev/docs/test-snapshots
++test('vrt top page', async ({ page }) => {
++  await page.goto('/');
++
++  await expect(page).toHaveScreenshot();
++})
++
++test('vrt about page', async ({ page }) => {
++  await page.goto('/about');
++
++  await expect(page).toHaveScreenshot();
+ })
+diff --git index.html index.html
+index a888544..f9f78ba 100644
+--- index.html
++++ index.html
+@@ -3,7 +3,15 @@
+   <head>
+     <meta charset="UTF-8">
+     <link rel="icon" href="/favicon.ico">
+-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
++    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, shrink-to-fit=no">
++    <link rel="manifest" href="/manifest.json" />
++
++    <meta name="apple-mobile-web-app-capable" content="no" />
++    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
++    <meta name="apple-mobile-web-app-title" content="Vite App">
++    <meta name="application-name" content="Vite App">
++    <meta name="msapplication-TileColor" content="#00aba9">
++
+     <title>Vite App</title>
+   </head>
+   <body>
+diff --git playwright.config.ts playwright.config.ts
+index ad20dab..d270b9f 100644
+--- playwright.config.ts
++++ playwright.config.ts
+@@ -1,5 +1,13 @@
+ import { defineConfig, devices } from '@playwright/test'
+ 
++const webServer = (): string => {
++  if (process.env.CI || process.env.ORIGINAL) {
++    // if ORIGINAL is set, outDir is overwrite
++    return 'vite preview --port 5173'
++  }
++  return 'vite dev'
++}
++
+ /**
+  * Read environment variables from file.
+  * https://github.com/motdotla/dotenv
+@@ -27,7 +35,11 @@ export default defineConfig({
+   /* Opt out of parallel tests on CI. */
+   workers: process.env.CI ? 1 : undefined,
+   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+-  reporter: 'html',
++  // 'github' for GitHub Actions CI to generate annotations, plus a concise 'dot'
++  // default 'list' when running locally
++  reporter: process.env.GITHUB_REPORT ? 'github' : [['html', { host: '0.0.0.0' }]],
++  // reporter: 'list',
++  // reporter: [['html', { host: '0.0.0.0' }]],
+   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+   use: {
+     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
+@@ -39,7 +51,8 @@ export default defineConfig({
+     trace: 'on-first-retry',
+ 
+     /* Only on CI systems run the tests headless */
+-    headless: !!process.env.CI
++    // headless: !!process.env.CI
++    headless: true
+   },
+ 
+   /* Configure projects for major browsers */
+@@ -61,35 +74,35 @@ export default defineConfig({
+       use: {
+         ...devices['Desktop Safari']
+       }
+-    }
++    },
+ 
+     /* Test against mobile viewports. */
+-    // {
+-    //   name: 'Mobile Chrome',
+-    //   use: {
+-    //     ...devices['Pixel 5'],
+-    //   },
+-    // },
+-    // {
+-    //   name: 'Mobile Safari',
+-    //   use: {
+-    //     ...devices['iPhone 12'],
+-    //   },
+-    // },
++    {
++      name: 'Mobile Chrome',
++      use: {
++        ...devices['Pixel 5'],
++      },
++    },
++    {
++      name: 'Mobile Safari',
++      use: {
++        ...devices['iPhone 12'],
++      },
++    },
+ 
+     /* Test against branded browsers. */
+-    // {
+-    //   name: 'Microsoft Edge',
+-    //   use: {
+-    //     channel: 'msedge',
+-    //   },
+-    // },
+-    // {
+-    //   name: 'Google Chrome',
+-    //   use: {
+-    //     channel: 'chrome',
+-    //   },
+-    // },
++    {
++      name: 'Microsoft Edge',
++      use: {
++        channel: 'msedge',
++      },
++    },
++    {
++      name: 'Google Chrome',
++      use: {
++        channel: 'chrome',
++      },
++    },
+   ],
+ 
+   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
+@@ -102,7 +115,7 @@ export default defineConfig({
+      * Use the preview server on CI for more realistic testing.
+      * Playwright will re-use the local server if there is already a dev-server running.
+      */
+-    command: process.env.CI ? 'vite preview --port 5173' : 'vite dev',
++    command: webServer(),
+     port: 5173,
+     reuseExistingServer: !process.env.CI
+   }
+diff --git vite.config.ts vite.config.ts
+index 5c45e1d..f6079da 100644
+--- vite.config.ts
++++ vite.config.ts
+@@ -5,6 +5,10 @@ import vue from '@vitejs/plugin-vue'
+ 
+ // https://vitejs.dev/config/
+ export default defineConfig({
++  build: {
++    // for VRT base snapshots
++    outDir: process.env.ORIGINAL
++  },
+   plugins: [
+     vue(),
+   ],
+diff --git .gitignore .gitignore
+index aef72d0..66f38d7 100644
+--- .gitignore
++++ .gitignore
+@@ -31,3 +31,19 @@ coverage
+ 
+ test-results/
+ playwright-report/
++vitest-result/
++storybook-static/
++# e2e/*-snapshots/
++
++# for container temp package.json
++.playwright/package.json
++.vitestui/package.json
++
++# for VRT original built
++vrt-original/
++
++# for container node_modules
++node_modules*
++
++*~
++/public/v.js
+diff --git vitest.config.ts vitest.config.ts
+index 10067d5..4bc2d4b 100644
+--- vitest.config.ts
++++ vitest.config.ts
+@@ -6,8 +6,17 @@ export default mergeConfig(
+   viteConfig,
+   defineConfig({
+     test: {
++      outputFile: {
++        html: './vitest-result/index.html',
++      },
++      reporters: ['default', 'html'],
++      coverage: {
++        // https://vitest.dev/config/#coverage
++        reporter: ['text', 'json', 'html'],
++        reportsDirectory: './vitest-result/coverage',
++      },
+       environment: 'jsdom',
+-      exclude: [...configDefaults.exclude, 'e2e/*'],
++      exclude: [...configDefaults.exclude, 'e2e/*', 'vue-app/**'],
+       root: fileURLToPath(new URL('./', import.meta.url))
+     }
+   })
+diff --git .storybook/preview.ts .storybook/preview.ts
+index 226a102..8053cc5 100644
+--- .storybook/preview.ts
++++ .storybook/preview.ts
+@@ -1,4 +1,5 @@
+ import type { Preview } from '@storybook/vue3'
++import '../src/assets/main.css';
+ 
+ const preview: Preview = {
+   parameters: {
