@@ -266,7 +266,7 @@ index 226a102..8053cc5 100644
  
  const preview: Preview = {
    parameters: {
-diff --git .dependency-cruiser.js .dependency-cruiser.js
+diff --git .dependency-cruiser.cjs .dependency-cruiser.cjs
 index cc64b44..69ec80c 100644
 --- .dependency-cruiser.js
 +++ .dependency-cruiser.js
