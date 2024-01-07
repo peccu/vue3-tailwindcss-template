@@ -44,7 +44,10 @@
     "// storybook related": "",
     "storybook": "storybook dev -h 0.0.0.0 -p 6006",
     "storybook:build": "storybook build",
-    "storybook:preview-built": "vite preview --host 0.0.0.0 --outDir storybook-static"
+    "storybook:preview-built": "vite preview --host 0.0.0.0 --outDir storybook-static",
+    "// Dependency Cruiser": "",
+    "depcruise": "depcruise src --config",
+    "depcruise:md": "depcruise src --config --output-type markdown"
   },
   "dependencies": {
     "pinia": "^2.1.7",
