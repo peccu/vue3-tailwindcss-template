@@ -266,3 +266,29 @@ index 226a102..8053cc5 100644
  
  const preview: Preview = {
    parameters: {
+diff --git .dependency-cruiser.cjs .dependency-cruiser.cjs
+index cc64b44..69ec80c 100644
+--- .dependency-cruiser.js
++++ .dependency-cruiser.js
+@@ -133,10 +133,10 @@ module.exports = {
+         "or there's something in the test folder that isn't a test.",
+       severity: 'error',
+       from: {
+-        pathNot: '^(e2e)'
++        pathNot: '^(e2e|__tests__)'
+       },
+       to: {
+-        path: '^(e2e)'
++        path: '^(e2e|__tests__)'
+       }
+     },
+     {
+@@ -162,7 +162,7 @@ module.exports = {
+         'from.pathNot re of the not-to-dev-dep rule in the dependency-cruiser configuration',
+       from: {
+         path: '^(src)',
+-        pathNot: '[.](spec|test)[.](js|mjs|cjs|ts|ls|coffee|litcoffee|coffee[.]md)$'
++        pathNot: '[.](spec|test|stories)[.](js|mjs|cjs|ts|ls|coffee|litcoffee|coffee[.]md)$'
+       },
+       to: {
+         dependencyTypes: [
