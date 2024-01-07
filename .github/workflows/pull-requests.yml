@@ -45,7 +45,9 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: MH4GF/dependency-cruiser-report-action@v2
+      - uses: MH4GF/dependency-cruiser-report-action@v2.4.0
+        with:
+          package-manager: bun
 
   # # https://github.com/MH4GF/dependency-cruiser-report-action
   # report2:
@@ -56,3 +58,35 @@ jobs:
   #     - uses: MH4GF/dependency-cruiser-report-action@v2
   #       with:
   #         cruise-script: yarn run -s depcruise src
+
+  depcruise:
+    name: 'Dependency Cruiser report'
+    permissions:
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install bun
+        uses: oven-sh/setup-bun@v1
+      - name: bun version
+        run: bun --version
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Dependency Cruise
+        run: bunx depcruise src --config --output-type markdown >> comment.md
+      - name: Dependency Cruise Mermaid block
+        run: |
+          echo '----' >> comment.md
+          echo '# Mermaid block' >> comment.md
+          echo '```mermaid' >> comment.md
+          bunx depcruise src --config --output-type mermaid >> comment.md
+          echo '```' >> comment.md
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          filePath: comment.md
+          # message: |
+          #   _(execution **${{ github.run_id }}** / attempt **${{ github.run_attempt }}**)_
+          comment_tag: execution
+      - name: Dependency Cruise for action state
+        run: bunx depcruise src --config
