@@ -56,6 +56,26 @@ This template should help get you started developing with Vue 3 in Vite.
     - GitHub pages are hosted in subdirectory, so I need to [specify the `--base` parameter](https://vitejs.dev/guide/build.html#public-base-path)
   - If you don't use `bun`, revert `package.json`'s `.scripts.build` into ``"run-p type-check \"build-only {@}\" -- "`` and your build script will looks like `npm run build -- -- --base=/${GITHUB_REPOSITORY#*/}/`.
     - `--` should be parsed twice at `npm run run-p` and `npm run build-only`.
+- shadcn vue
+  - `shadcn-vue@latest init`
+    ```
+    ✔ Would you like to use TypeScript (recommended)? … no / yes
+    ✔ Which framework are you using? › Vite
+    ✔ Which style would you like to use? › New York
+    ✔ Which color would you like to use as base color? › Slate
+    ✔ Where is your global CSS file? … src/assets/base.css
+    ✔ Would you like to use CSS variables for colors? … no / yes
+    ✔ Where is your tailwind.config located? … tailwind.config.js
+    ✔ Configure the import alias for components: … @/components
+    ✔ Configure the import alias for utils: … @/lib/utils
+    ✔ Write configuration to components.json. Proceed? … yes
+
+    ✔ Writing components.json...
+    ✔ Initializing project...
+    ✔ Installing dependencies...
+
+    Success! Project initialization completed.
+    ```
 
 ## Recommended IDE Setup
 
