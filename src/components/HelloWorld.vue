@@ -3,6 +3,7 @@ defineProps<{
   msg: string
 }>()
 import { ref } from 'vue'
+import { Button } from '@/components/ui/button'
 const number = ref(0)
 </script>
 
@@ -20,6 +21,7 @@ const number = ref(0)
       class="p-1 mr-3 w-20 w-full text-black"
       v-model="number"
     />
+    <Button>Click me</Button>
     <h3 class="text-center lg:text-left text-[1.2rem]">
       You’ve successfully created a project with
       <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
