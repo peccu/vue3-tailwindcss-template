@@ -5,7 +5,7 @@ echo port mapping is 51204:51204
 CONTAINER_NAME=vitestui
 COMMAND="npm run test:vitestui"
 PORT_MAPPINGS="-p 51204:51204"
-VOLUMES="-v $(PWD)/node_modules_vitestui:/app/node_modules"
+VOLUMES="-v $PWD/node_modules_vitestui:/app/node_modules"
 ENVIRONMENT=""
 
 source ./container.sh
