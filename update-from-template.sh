@@ -58,6 +58,7 @@ patch -p0 < ../patch/my-config.patch
 
 rm -rf node_modules
 rm bun.lockb
+find . '(' -name \*.orig ')' -delete
 
 cd ..
 
