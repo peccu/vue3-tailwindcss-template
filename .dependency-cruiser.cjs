@@ -350,7 +350,7 @@ module.exports = {
         If you have a 'conditionNames' attribute in your webpack config, that one will
         have precedence over the one specified here.
       */
-      conditionNames: ["import", "require", "node", "default"],
+      conditionNames: ["import", "require", "node", "default", "types"],
       /*
          The extensions, by default are the same as the ones dependency-cruiser
          can access (run `npx depcruise --info` to see which ones that are in
@@ -486,4 +486,4 @@ module.exports = {
     }
   }
 };
-// generated: dependency-cruiser@16.0.0 on 2024-01-07T14:10:04.631Z
+// generated: dependency-cruiser@16.2.0 on 2024-02-16T14:20:52.716Z
