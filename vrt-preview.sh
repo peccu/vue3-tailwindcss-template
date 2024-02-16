@@ -10,7 +10,7 @@ echo port mapping is 4173:4173
 CONTAINER_NAME=bun-vrt-preview
 COMMAND="bun run test:vrt:preview"
 PORT_MAPPINGS="-p 4173:4173"
-VOLUMES="-v $(PWD)/node_modules_container:/app/node_modules"
+VOLUMES="-v $PWD/node_modules_container:/app/node_modules"
 ENVIRONMENT=""
 
 source ./container.sh

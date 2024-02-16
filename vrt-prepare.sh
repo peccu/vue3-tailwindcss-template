@@ -3,7 +3,7 @@
 CONTAINER_NAME=bun-vrt-prepare
 COMMAND="bun run test:vrt:prepare"
 PORT_MAPPINGS=""
-VOLUMES="-v $(PWD)/node_modules_container:/app/node_modules"
+VOLUMES="-v $PWD/node_modules_container:/app/node_modules"
 ENVIRONMENT=""
 
 source ./container.sh

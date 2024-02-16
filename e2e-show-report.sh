@@ -7,7 +7,7 @@ echo 'show test report with "npm run test:e2e:show-report"'
 CONTAINER_NAME=playwright
 COMMAND="bun run test:e2e:show-report"
 PORT_MAPPINGS="-p 9323:9323"
-VOLUMES="-v $(PWD)/node_modules_container:/app/node_modules"
+VOLUMES="-v $PWD/node_modules_container:/app/node_modules"
 ENVIRONMENT=""
 
 source container.sh
