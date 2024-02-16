@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright:v1.40.1-jammy
+FROM mcr.microsoft.com/playwright:v1.41.2-jammy
 
 # Install bun and add it to PATH
 ENV VER_bun=v1.0.20

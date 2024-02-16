@@ -7,7 +7,7 @@ echo 'update snapshots with "npm run build && npm run test:e2e:update-snapshots"
 CONTAINER_NAME=playwright
 COMMAND="bun run build && bun run test:e2e:update-snapshots"
 PORT_MAPPINGS="-p 9323:9323"
-VOLUMES="-v $(PWD)/node_modules_container:/app/node_modules"
+VOLUMES="-v $PWD/node_modules_container:/app/node_modules"
 ENVIRONMENT=""
 
 source container.sh
